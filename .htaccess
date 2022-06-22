@@ -1,4 +1,6 @@
 RewriteEngine on
+RewriteCond %{HTTPS} !=on
+RewriteRule ^/?(.*) https://%domain.com/$1 [R,L]
 RewriteCond %{SCRIPT_FILENAME} !-f
 RewriteCond %{SCRIPT_FILENAME} !-d
 RewriteCond %{SCRIPT_FILENAME} !-l
