@@ -1,0 +1,17 @@
+{
+    "name": "thiago/meu-site",
+    "autoload": {
+        "psr-4": {
+            "Thiago\\MeuSite\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Thiago Novaes",
+            "email": "novaesthago@gmail.com"
+        }
+    ],
+    "require": {
+        "pecee/simple-router": "4.3.6.1"
+    }
+}
