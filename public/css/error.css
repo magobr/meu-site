@@ -1,0 +1,14 @@
+
+.error h1{
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+.text-presentation__errror{
+    text-align: center;
+    color: #d2dae2;
+    border-radius: 5px;
+    padding: 22px;
+    margin: 20px 15px;
+    background: #485460;
+}
