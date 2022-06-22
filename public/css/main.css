@@ -1,0 +1,151 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto');
+*{
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+body{
+    background-color: #1e272e;
+    color: #dfe6e9;
+    font-family: 'Roboto', sans-serif;
+}
+
+header .container {
+    margin: 20px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+header .name-profile{
+    width: 300px;
+    font-size: .9rem;
+    margin: 20px 0 10px 0;
+    font-weight: bolder;
+    text-align: center;
+
+}
+
+header .skill-profile{
+    margin: 10px 0;
+    font-size: .8rem;
+    font-weight: bolder;
+
+}
+
+header .img-profile img{
+    display: block;
+    margin: 0px auto;
+    align-self: center;
+    width: 70%;
+    border-radius: 50%;
+}
+
+section .container {
+    margin: 20px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+section .text-presentation{
+    max-width: 500px;
+    background: #575fcf;
+    border-radius: 5px;
+    padding: 22px;
+    margin: 20px 15px;
+    color: #1e272e;
+}
+
+section .text-presentation p{
+    font-size: 1.2rem;
+    word-spacing: 3px;
+    margin: 10px 0;
+}
+
+section .text-presentation .frase{
+    font-style: italic;
+    font-size: 1.2rem;
+    word-spacing: 3px;
+    margin: 15px 0;
+}
+
+section .text-presentation .frase span{
+    color: #151c20;
+    font-weight: bold;
+}
+
+footer .footer-cards{
+    width: 100%;
+    padding: 15px 0;
+    background: #ffc048;
+    color: #1e272e;
+}
+
+footer .footer-cards .cop{
+    margin: 25px 0 5px 0;
+    text-align: center;
+}
+
+footer .container {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+footer .footer-card{
+    align-self: stretch;
+    margin: 0 50px;
+}
+
+footer .footer-card__title{
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+footer .footer-card__contents{
+    min-width: 200px;
+}
+
+footer .footer-card__contents ul{
+    list-style: none;
+}
+
+footer .footer-card__contents ul li{
+    margin: 10px 0;
+}
+
+footer .footer-card__contents a{
+    text-decoration: none;
+    color: #1e272e;
+}
+
+footer .footer-card__contents ul li a:hover{
+    text-decoration: underline;
+    transition: .2s;
+    color: #3c40c6;
+}
+
+footer .footer-card__contents .icon{
+    margin: 0 5px;
+    width: 35px;
+}
+
+
+@media screen and (max-width: 420px) {
+    footer .container{
+        flex-direction: column-reverse;
+    }
+
+    footer .footer-card{
+        margin: 20px 50px;
+    }
+    
+}
