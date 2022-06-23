@@ -7,10 +7,12 @@ use Pecee\Http\Request;
 use Pecee\Http\Response;
 use View\Controller\ViewController;
 
+// Render Pages
 SimpleRouter::get('/', [ViewController::class, "renderPage"]);
+SimpleRouter::get('/blog', [ViewController::class, "renderBlog"]);
 
+// error pages
 SimpleRouter::get('/not-found', [ViewController::class, "errorPage"]);
-
 SimpleRouter::get('/forbidden', [ViewController::class, "forbiddenPage"]);
 
 
