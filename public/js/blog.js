@@ -62,7 +62,7 @@ async function load() {
         });
         return
     }
-    sectionContainerPost.innerHTML += "<h3 style='padding: 30px;'>Sem Postagems por enquanto, aguarde!</h3>";
+    sectionContainer.innerHTML += "<h3 style='padding: 30px;'>Sem Postagens por enquanto, aguarde!</h3>";
 
 }
 
