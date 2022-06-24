@@ -55,9 +55,15 @@ const componentPost = (content) => {
 
 async function load() {
     let res = await consumeApi(null, "/blog/posts", "GET");
-    res.data.forEach((element) => {
-        sectionContainerPost.innerHTML += componentAllPosts(element);
-    });
+
+    if (!res.error) {
+        res.data.forEach((element) => {
+            sectionContainerPost.innerHTML += componentAllPosts(element);
+        });
+        return
+    }
+    sectionContainerPost.innerHTML += "<h3 style='padding: 30px;'>Sem Postagems por enquanto, aguarde!</h3>";
+
 }
 
 async function loadAllPosts(){
