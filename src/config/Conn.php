@@ -10,7 +10,7 @@ class Sql extends PDO
         $username = $_ENV['USERNAME'];
         $password = $_ENV['PASSWORD'];
         $dbname = $_ENV['DBNAME'];
-        $port = $_ENV['PORT'];
+        $port = $_ENV['PORTA'];
 
         $options = array(
             PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8',
