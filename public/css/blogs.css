@@ -84,6 +84,11 @@
     display: none;
 }
 
+#disqus_thread{
+    width: 600px;
+    margin: 0 auto;
+}
+
 @media screen and (max-width: 420px) {
     .post__item {
         width: 315px;
