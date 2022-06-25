@@ -33,8 +33,8 @@ const consumeApi = async (body=null, endPoint, method="POST", mode="") =>{
 const componentAllPosts = (content) => {
     return `<div class="post__item" id="${content.id}">
                 <div class="post__item__titulo"><h1>${content.titulo}</h1></div>
-                <div class="post__item__autor">${content.user_post}</div>
-                <div class="post__item__data">${content.created_at}</div>
+                <div class="post__item__autor info">${content.user_post}</div>
+                <div class="post__item__data info">${content.created_at}</div>
             </div>`;
 }
 
