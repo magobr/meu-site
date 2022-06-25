@@ -80,6 +80,10 @@
     line-height: 1.58;
 }
 
+.d-none{
+    display: none;
+}
+
 @media screen and (max-width: 420px) {
     .post__item {
         width: 315px;
