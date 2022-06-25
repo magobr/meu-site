@@ -5,3 +5,11 @@ RewriteCond %{SCRIPT_FILENAME} !-f
 RewriteCond %{SCRIPT_FILENAME} !-d
 RewriteCond %{SCRIPT_FILENAME} !-l
 RewriteRule ^(.*)$ index.php/$1
+
+Header unset Pragma
+FileETag None
+Header unset ETag
+
+<FilesMatch "\.(js|css)$">
+Header set Cache-Control "max-age=720, must-revalidate"
+</FilesMatch>
