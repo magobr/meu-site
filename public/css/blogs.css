@@ -93,4 +93,9 @@
     .post__item {
         width: 315px;
     }
+
+    #disqus_thread{
+        width: 400px;
+        margin: 0 auto;
+    }
 }
