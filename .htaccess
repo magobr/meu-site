@@ -11,5 +11,5 @@ FileETag None
 Header unset ETag
 
 <FilesMatch "\.(js|css)$">
-Header set Cache-Control "max-age=7200, must-revalidate"
+Header set Cache-Control "max-age=720, must-revalidate"
 </FilesMatch>
