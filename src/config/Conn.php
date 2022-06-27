@@ -1,5 +1,9 @@
 <?php
 
+namespace Config\Conn;
+
+use \PDO;
+
 class Sql extends PDO
 {
     private $conn;
@@ -19,7 +23,7 @@ class Sql extends PDO
         try{
             $this->conn = new PDO("mysql:host=$servername;port=$port;dbname=$dbname",$username,$password, $options);
             $this->conn -> setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-        } catch(PDOException $e){
+        } catch(\PDOException $e){
             echo "Connection failed: " . $e -> getMessage();
         }
 
@@ -27,9 +31,17 @@ class Sql extends PDO
 
     public function find(string $table, string $params = "", $campos = " * ")
     {
-        $query = "SELECT $campos FROM $table $params;";
-        $stmt = $this->conn->query($query); 
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        try {
+            $query = "SELECT $campos FROM $table $params;";
+            $stmt = $this->conn->query($query); 
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (\Throwable $th) {
+            return [
+                "error" => true,
+                "message" => "Erro de consulta no banco de dados",
+                "Throw" => $th
+            ];
+        }
     }
 }
 
