@@ -4,7 +4,7 @@ namespace Posts\Model;
 
 require_once __DIR__.'/../config/Conn.php';
 
-use Sql;
+use Config\Conn\Sql;
 
 class PostsModel extends Sql
 {
@@ -12,7 +12,7 @@ class PostsModel extends Sql
     {
         $data =[
             "table" => "POSTS",
-            "campos" => "POSTS.id, DATE_FORMAT(POSTS.created_at, '%d/%m/%Y') AS created_at, POSTS.titulo, POSTS.conteudo, USER_POSTER.nome as user_post",
+            "campos" => "POSTS.id, DATE_FORMAT(POSTS.created_at, '%d/%m/%Y') AS created_at, POSTS.titulo, USER_POSTER.nome as user_post",
             "params"=>"INNER JOIN USER_POSTER ON POSTS.user_post = USER_POSTER.id"
         ];
 
@@ -36,10 +36,11 @@ class PostsModel extends Sql
     {
         $data =[
             "table" => "POSTS",
+            "campos" => "POSTS.id, DATE_FORMAT(POSTS.created_at, '%d/%m/%Y') AS created_at, POSTS.titulo, USER_POSTER.nome as user_post",
             "params"=>"INNER JOIN USER_POSTER ON POSTS.user_post = USER_POSTER.id WHERE USER_POSTER.id = '$id'"
         ];
 
         $sql = new Sql();
-        return $sql->find($data['table'], $data['params']);
+        return $sql->find($data['table'], $data['params'], $data['campos']);
     }
 }
