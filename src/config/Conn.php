@@ -29,12 +29,27 @@ class Sql extends PDO
 
     }
 
-    public function find(string $table, string $params = "", $campos = " * ")
+    public function find(string $tabela, string $params = "", $campos = " * ")
     {
         try {
-            $query = "SELECT $campos FROM $table $params;";
+            $query = "SELECT $campos FROM $tabela $params;";
             $stmt = $this->conn->query($query); 
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (\Throwable $th) {
+            return [
+                "error" => true,
+                "message" => "Erro de consulta no banco de dados",
+                "Throw" => $th
+            ];
+        }
+    }
+
+    public function store(string $tabela, array $valores, string $campos, string $indexCampos)
+    {
+        try {
+            $query = "INSERT INTO $tabela ($campos) VALUES ($indexCampos)";
+            $stmt = $this->conn->prepare($query);
+            return $stmt->execute($valores);
         } catch (\Throwable $th) {
             return [
                 "error" => true,
