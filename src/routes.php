@@ -2,11 +2,13 @@
 
 require_once __DIR__.'/controllers/ViewController.php';
 require_once __DIR__.'/controllers/BlogController.php';
+require_once __DIR__.'/controllers/UserController.php';
 
 use Pecee\SimpleRouter\SimpleRouter;
 use Pecee\Http\Request;
 use View\Controller\ViewController;
 use Blog\Controller\BlogController;
+use User\Controller\UserController;
 
 // Render Pages
 SimpleRouter::get('/', [ViewController::class, "renderPage"]);
@@ -16,6 +18,9 @@ SimpleRouter::get('/blog', [ViewController::class, "renderBlog"]);
 SimpleRouter::get('/blog/posts', [BlogController::class, "getPosts"]);
 SimpleRouter::get('/blog/posts/{id}', [BlogController::class, "getPost", $params]);
 SimpleRouter::get('/blog/posts/user/{id}', [BlogController::class, "getPostByUser", $params]);
+
+// Users
+SimpleRouter::post('/user/new', [UserController::class, "insertUser"]);
 
 // error pages
 SimpleRouter::get('/not-found', [ViewController::class, "errorPage"]);
