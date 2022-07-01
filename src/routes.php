@@ -14,13 +14,14 @@ use User\Controller\UserController;
 SimpleRouter::get('/', [ViewController::class, "renderPage"]);
 SimpleRouter::get('/blog', [ViewController::class, "renderBlog"]);
 
-// Blogs
+// Blogs Api
 SimpleRouter::get('/blog/posts', [BlogController::class, "getPosts"]);
 SimpleRouter::get('/blog/posts/{id}', [BlogController::class, "getPost", $params]);
 SimpleRouter::get('/blog/posts/user/{id}', [BlogController::class, "getPostByUser", $params]);
 SimpleRouter::post('/post/new', [BlogController::class, "insertPost"]);
+SimpleRouter::delete('/post/delete/{id}', [BlogController::class, "purgePost", $params]);
 
-// Users
+// Users Api
 SimpleRouter::post('/user/new', [UserController::class, "insertUser"]);
 
 // error pages

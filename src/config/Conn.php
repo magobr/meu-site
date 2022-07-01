@@ -58,5 +58,21 @@ class Sql extends PDO
             ];
         }
     }
-}
 
+    public function delItem(string $tabela, array $data, string $params)
+    {
+        try {
+            $query = "DELETE FROM $tabela WHERE $params";
+            $stmt = $this->conn->prepare($query);
+            $stmt->execute($data);
+            return $stmt->rowCount();
+            
+        } catch (\Throwable $th) {
+            return [
+                "error" => true,
+                "message" => "Erro de consulta no banco de dados",
+                "Throw" => $th
+            ];
+        }
+    }
+}

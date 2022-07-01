@@ -104,4 +104,33 @@ class BlogController extends PostsModel
          "Message" => "Post publicado com sucesso"
      ]);
    }
+
+   static public function purgePost($id)
+   {
+      $post = PostsModel::findPostsById($id);
+
+      if ($post['error']) {
+         SimpleRouter::response()->json([
+            $post
+         ]);
+      }
+      
+      if (sizeof($post) === 0) {
+         SimpleRouter::response()->json([
+            "error" => false,
+            "data" => $post,
+            "message" => "Não foi encontrado dados"
+         ]);
+      }
+      
+      $result = PostsModel::deletePost($id);
+
+      if ($result > 0) {
+         SimpleRouter::response()->httpCode(202)->json([
+            "error" => false,
+            "Message" => "Post deletado com sucesso"
+         ]);
+      }
+      
+   }
 }
