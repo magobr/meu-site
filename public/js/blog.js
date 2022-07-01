@@ -31,7 +31,15 @@ const consumeApi = async (body=null, endPoint, method="POST", mode="") =>{
     
 }
 
-const componentAllPosts = (content) => {
+const componentAllPosts = (content, newPost) => {
+    if (newPost) {
+        return `<div class="post__item" id="${content.id}">
+                    <div class="post__item_new"><span>New Post!</span></div>
+                    <div class="post__item__titulo"><h1>${content.titulo}</h1></div>
+                    <div class="post__item__autor info">${content.user_post}</div>
+                    <div class="post__item__data info">${content.created_at}</div>
+                </div>`;    
+    }
     return `<div class="post__item" id="${content.id}">
                 <div class="post__item__titulo"><h1>${content.titulo}</h1></div>
                 <div class="post__item__autor info">${content.user_post}</div>
@@ -56,7 +64,10 @@ const componentPost = (content) => {
 async function load() {
     let res = await consumeApi(null, "/blog/posts", "GET");
     if (res.data.length !== 0) {
-        res.data.forEach((element) => {
+        res.data.forEach((element, index) => {
+            if (index === 0) {
+                sectionContainerPost.innerHTML += componentAllPosts(element, true);    
+            }
             sectionContainerPost.innerHTML += componentAllPosts(element);
         });
         return
