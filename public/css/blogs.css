@@ -84,6 +84,20 @@
     display: none;
 }
 
+.post__item .post__item_new{
+    position: absolute;
+    right: 0;
+    width: 300px;
+}
+
+.post__item .post__item_new span{
+    padding: 5px;
+    background: #ff5e57;
+    border-radius: 3px;
+    text-shadow: 2px 2px #1e272e;
+    font-weight: bold;
+}
+
 #disqus_thread{
     width: 600px;
     margin: 0 auto;
