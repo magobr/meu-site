@@ -6,7 +6,7 @@ require_once __DIR__.'/../model/PostsModel.php';
 
 use Posts\Model\PostsModel;
 use Pecee\SimpleRouter\SimpleRouter;
-
+use Ramsey\Uuid\Uuid;
 
 class BlogController extends PostsModel
 {
@@ -81,5 +81,27 @@ class BlogController extends PostsModel
          "error" => false,
          "data" => $result
       ]);
+   }
+
+   static public function insertPost()
+   {
+      $arrInput = json_decode(file_get_contents('php://input'));
+      $userUuid = Uuid::uuid4();
+      $arrInput->{"id"}=$userUuid->toString();
+
+      $valores = get_object_vars($arrInput);
+
+      $resp = PostsModel::storePost($valores);
+
+      if ($resp["error"]) {
+         SimpleRouter::response()->httpCode(200)->json([
+            $resp
+        ]);
+      }
+
+      SimpleRouter::response()->httpCode(201)->json([
+         "error" => false,
+         "Message" => "Post publicado com sucesso"
+     ]);
    }
 }
