@@ -66,9 +66,10 @@ async function load() {
     if (res.data.length !== 0) {
         res.data.forEach((element, index) => {
             if (index === 0) {
-                sectionContainerPost.innerHTML += componentAllPosts(element, true);    
+                sectionContainerPost.innerHTML += componentAllPosts(element, true);  
+            } else {
+                sectionContainerPost.innerHTML += componentAllPosts(element, false);
             }
-            sectionContainerPost.innerHTML += componentAllPosts(element);
         });
         return
     }
