@@ -87,7 +87,7 @@
 .post__item .post__item_new{
     position: absolute;
     right: 0;
-    width: 300px;
+    width: 320px;
 }
 
 .post__item .post__item_new span{
@@ -111,5 +111,8 @@
     #disqus_thread{
         width: 360px;
         margin: 0 auto;
+    }
+    .post__item .post__item_new{
+        width: 100px;
     }
 }
