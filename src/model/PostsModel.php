@@ -13,7 +13,7 @@ class PostsModel extends Sql
         $data =[
             "table" => "POSTS",
             "campos" => "POSTS.id, DATE_FORMAT(POSTS.created_at, '%d/%m/%Y') AS created_at, POSTS.titulo, USER_POSTER.nome as user_post",
-            "params"=>"INNER JOIN USER_POSTER ON POSTS.user_post = USER_POSTER.id"
+            "params"=>"INNER JOIN USER_POSTER ORDER BY POSTS.created_at DESC"
         ];
 
         $sql = new Sql();
@@ -42,5 +42,18 @@ class PostsModel extends Sql
 
         $sql = new Sql();
         return $sql->find($data['table'], $data['params'], $data['campos']);
+    }
+
+    static public function storePost($valores)
+    {
+        $data = [
+            "table" => "POSTS",
+            "campos" => "id, titulo, conteudo, user_post",
+            "indexCampos" => ":id, :titulo, :conteudo, :user_post",
+            "valores" => $valores
+        ];
+
+        $sql = new Sql();
+        return $sql->store($data['table'], $data['valores'], $data['campos'], $data['indexCampos']);
     }
 }
