@@ -56,4 +56,15 @@ class PostsModel extends Sql
         $sql = new Sql();
         return $sql->store($data['table'], $data['valores'], $data['campos'], $data['indexCampos']);
     }
+
+    static public function deletePost($id)
+    {
+        $data = [
+            "table" => "POSTS",
+            "params" => "id = :id",
+        ];
+
+        $sql = new Sql();
+        return $sql->delItem($data["table"], ["id" => $id], $data["params"]);
+    }
 }
