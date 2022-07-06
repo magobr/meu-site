@@ -194,7 +194,12 @@ footer .footer-card__contents ul li a:hover{
 
 footer .footer-card__contents .icon{
     margin: 0 5px;
-    width: 35px;
+    font-size: 35px;
+}
+
+footer .footer-card__contents .icon:hover{
+    transition: .2s;
+    color: #3c40c6;
 }
 
 
