@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% include "components/head.twig" %}
+    {% include "utils/blogs.css.twig" %}
+<body>
+    <header>
+        {% include "components/menu.twig" %}
+    </header>
+
+    <section>
+        <div class="container">
+            <div class="content__posts"></div>
+        </div>
+    </section>
+
+    <div id="disqus_thread" class="d-none"></div>
+    <script>
+        (function() { // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        s.src = 'https://https-www-thiagonovaes-com.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    
+    <script id="dsq-count-scr" src="//https-www-thiagonovaes-com.disqus.com/count.js" async></script>
+    <script src="/public/js/blog.js"></script>
+    <script src="/public/js/utils.js"></script>
+
+    {% include "components/footer.twig" %}
+    {% include "scripts/icons.twig" %}
+</body>

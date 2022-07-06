@@ -6,29 +6,41 @@ class ViewController
 {
     static function renderPage()
     {
-        $htmlPage =  __DIR__."/../view/index.html";
-        readfile($htmlPage);
+        $loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/../view');
+        $twig = new \Twig\Environment($loader);
+
+        $template = $twig->load('index.twig');
+        echo $template->render();
         return;
     }
 
     static function renderBlog()
     {
-        $htmlPage =  __DIR__."/../view/blog/index.html";
-        readfile($htmlPage);
+        $loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/../view');
+        $twig = new \Twig\Environment($loader);
+
+        $template = $twig->load('pages/blogs.twig');
+        echo $template->render();
         return;
     }
 
 
     static function errorPage()
     {
-        $htmlPage =  __DIR__."/../view/error/404.html";
-        readfile($htmlPage);
+        $loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/../view');
+        $twig = new \Twig\Environment($loader);
+
+        $template = $twig->load('error/404.twig');
+        echo $template->render();
         return;
     }
     static function forbiddenPage()
     {
-        $htmlPage =  __DIR__."/../view/error/403.html";
-        readfile($htmlPage);
+        $loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/../view');
+        $twig = new \Twig\Environment($loader);
+
+        $template = $twig->load('error/403.twig');
+        echo $template->render();
         return;
     }
 
