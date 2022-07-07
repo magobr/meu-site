@@ -1,5 +1,4 @@
 RewriteEngine on
-RewriteRule ^(.*)$ - [F] 
 RewriteCond %{HTTP_HOST} ^thiagonovaes.com [NC]
 RewriteRule (.*) https://www.thiagonovaes.com/$1 [L,R=301]
 RewriteCond %{SCRIPT_FILENAME} !-f
@@ -10,6 +9,10 @@ RewriteRule ^(.*)$ index.php/$1
 Header unset Pragma
 FileETag None
 Header unset ETag
+
+<Directory "/src"> 
+    Options -Indexes 
+</Directory>
 
 <FilesMatch "\.(js|css)$">
 Header set Cache-Control "max-age=720, must-revalidate"
