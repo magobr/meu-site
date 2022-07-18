@@ -21,11 +21,7 @@ class BlogController extends PostsModel
       }
 
       if (sizeof($result) === 0) {
-         SimpleRouter::response()->json([
-            "error" => false,
-            "data" => $result,
-            "message" => "Não foi encontrado dados"
-         ]);
+         SimpleRouter::response()->redirect('/not-found');
       }
 
       $loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/../view');
@@ -37,11 +33,6 @@ class BlogController extends PostsModel
          "data" => $result
       ]);
       return;
-
-      // SimpleRouter::response()->json([
-      //    "error" => false,
-      //    "data" => $result
-      // ]);
    }
     
 
@@ -56,22 +47,13 @@ class BlogController extends PostsModel
       }
 
       if (sizeof($result) === 0) {
-         SimpleRouter::response()->json([
-            "error" => false,
-            "data" => $result,
-            "message" => "Não foi encontrado dados"
-         ]);
+         SimpleRouter::response()->redirect('/not-found');
       }
-
-      // SimpleRouter::response()->json([
-      //    "error" => false,
-      //    "data" => $result
-      // ]);
 
       $loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/../view');
       $twig = new \Twig\Environment($loader);
 
-      $template = $twig->load('pages/blog.twig');
+      $template = $twig->load('pages/post.twig');
       echo $template->render([
          "error" => false,
          "data" => $result
@@ -151,6 +133,5 @@ class BlogController extends PostsModel
             "Message" => "Post deletado com sucesso"
          ]);
       }
-      
    }
 }

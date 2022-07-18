@@ -15,14 +15,27 @@
     <section>
         <div class="container">
             <div class="content__posts">
-                {% for content in data %}
-                <a href="/blog/{{content.id}}">
-                    <div class="post__item" id="{{content.id}}">
-                        <div class="post__item__titulo"><h1>{{content.titulo}}</h1></div>
-                        <div class="post__item__autor info">{{content.user_post}}</div>
-                        <div class="post__item__data info">{{content.created_at}}</div>
-                    </div>
-                </a>
+                {% for key, content in data %}
+
+                    {% if key == 0  %}
+                        <a href="/blog/{{content.id}}">
+                            <div class="post__item" id="{{content.id}}">
+                                <div class="post__item_new"><span>New Post!</span></div>
+                                <div class="post__item__titulo"><h1>{{content.titulo}}</h1></div>
+                                <div class="post__item__autor info">{{content.user_post}}</div>
+                                <div class="post__item__data info">{{content.created_at}}</div>
+                            </div>
+                        </a>
+                    {% else %}
+                        <a href="/blog/{{content.id}}">
+                            <div class="post__item" id="{{content.id}}">
+                                <div class="post__item__titulo"><h1>{{content.titulo}}</h1></div>
+                                <div class="post__item__autor info">{{content.user_post}}</div>
+                                <div class="post__item__data info">{{content.created_at}}</div>
+                            </div>
+                        </a>
+                    {% endif %}
+                
                 {% endfor %}
             </div>
         </div>
