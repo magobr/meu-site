@@ -10,10 +10,6 @@ Header unset Pragma
 FileETag None
 Header unset ETag
 
-<Directory "/src"> 
-    Options -Indexes 
-</Directory>
-
 <FilesMatch "\.(js|css)$">
 Header set Cache-Control "max-age=720, must-revalidate"
 </FilesMatch>
