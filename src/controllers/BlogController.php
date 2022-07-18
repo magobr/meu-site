@@ -28,10 +28,20 @@ class BlogController extends PostsModel
          ]);
       }
 
-      SimpleRouter::response()->json([
+      $loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/../view');
+      $twig = new \Twig\Environment($loader);
+
+      $template = $twig->load('pages/blogs.twig');
+      echo $template->render([
          "error" => false,
          "data" => $result
       ]);
+      return;
+
+      // SimpleRouter::response()->json([
+      //    "error" => false,
+      //    "data" => $result
+      // ]);
    }
     
 
@@ -53,10 +63,20 @@ class BlogController extends PostsModel
          ]);
       }
 
-      SimpleRouter::response()->json([
+      // SimpleRouter::response()->json([
+      //    "error" => false,
+      //    "data" => $result
+      // ]);
+
+      $loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/../view');
+      $twig = new \Twig\Environment($loader);
+
+      $template = $twig->load('pages/blog.twig');
+      echo $template->render([
          "error" => false,
          "data" => $result
       ]);
+      return;
    }
 
    static public function getPostByUser($id)

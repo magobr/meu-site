@@ -36,6 +36,10 @@
     margin: 25px;
 }
 
+.content__posts a{
+    color: #d2dae2;
+}
+
 .content__posts__item #back_post{
     cursor: pointer;
     background-color: #ff3f34;
