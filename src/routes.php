@@ -12,10 +12,10 @@ use User\Controller\UserController;
 
 // Render Pages
 SimpleRouter::get('/', [ViewController::class, "renderPage"]);
-SimpleRouter::get('/blog', [ViewController::class, "renderBlog"]);
+SimpleRouter::get('/blog', [BlogController::class, "getPosts"]);
+SimpleRouter::get('/blog/{id}', [BlogController::class, "getPost", $params]);
 
 // Blogs Api
-SimpleRouter::get('/blog/posts', [BlogController::class, "getPosts"]);
 SimpleRouter::get('/blog/posts/{id}', [BlogController::class, "getPost", $params]);
 SimpleRouter::get('/blog/posts/user/{id}', [BlogController::class, "getPostByUser", $params]);
 SimpleRouter::post('/post/new', [BlogController::class, "insertPost"]);

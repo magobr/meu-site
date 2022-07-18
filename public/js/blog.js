@@ -86,11 +86,6 @@ async function loadAllPosts(){
             sectionContainer.innerHTML = componentPost(res.data[0])
             divComentarios.classList.remove('d-none');
 
-            var disqus_config = function () {
-                this.page.url = window.location;
-                this.page.identifier = data[0].id; 
-            };
-            
             let btnBack = document.getElementById("back_post");
             btnBack.addEventListener("click", async ()=>{
                 window.location.reload();

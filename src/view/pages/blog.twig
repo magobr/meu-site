@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {% include "components/head.twig" %}
+        {% include "utils/blogs.css.twig" %}
+    </head>
+<body>
+    <button class="back-to-top" title="back To Up">
+        <svg xmlns="http://www.w3.org/2000/svg" class="back-to-top-icon" viewBox="0 0 512 512"><title>Caret Up</title><path d="M414 321.94L274.22 158.82a24 24 0 00-36.44 0L98 321.94c-13.34 15.57-2.28 39.62 18.22 39.62h279.6c20.5 0 31.56-24.05 18.18-39.62z"/></svg>
+    </button>
+    <header>
+        {% include "components/menu.twig" %}
+    </header>
+
+    <section>
+        <div class="container">
+            {% for content in data %}
+            <div id="{{content.id}}" class="content__posts__item">
+                <button id="back_post">Voltar</button>
+                <div class="posts__item">
+                    <div class="posts__item__titulo"><h1>{{content.titulo}}</h1></div>
+                    <div class="posts__item__info">
+                        <div class="posts__item__data">{{content.created_at}}</div>
+                        <div class="posts__item__user">{{content.user_post}}</div>
+                    </div>
+                    <div class="posts__item__content">{{content.conteudo|raw}}</div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <script>
+        let btnBack = document.getElementById("back_post");
+        btnBack.addEventListener("click", async ()=>{
+            window.location.href = '/blog';
+        })
+    </script>
+    
+
+    <div id="disqus_thread"></div>
+    <script>
+        (function() { // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        s.src = 'https://https-www-thiagonovaes-com.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    
+    <script id="dsq-count-scr" src="//https-www-thiagonovaes-com.disqus.com/count.js" async></script>
+
+    <script>
+        var disqus_config = function () {
+            this.page.url = window.location;
+            this.page.identifier = window.location.href; 
+        };
+    </script>
+    
+    <script src="/public/js/utils.js"></script>
+
+    {% include "components/footer.twig" %}
+    {% include "scripts/icons.twig" %}
+</body>
