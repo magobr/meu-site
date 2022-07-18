@@ -58,6 +58,7 @@ header .header__menu{
 
 header .header__menu nav{
     display: flex;
+    flex-direction: row-reverse;
     align-items: center;
     justify-content: center;
     height: 100%;
@@ -72,9 +73,21 @@ header .header__menu nav .header__menu_items ul li{
     margin: 0 15px;
 }
 
-header .header__menu nav .header__menu_items ul li .icon {
+header .header__menu nav .header__menu_items .icon {
     margin: 0;
-    width: 20px;
+    font-size: 35px;
+}
+
+header .header__menu #close-menu-icon{
+    display: none;
+}
+
+header .header__menu #menu-icon{
+   display: none;
+}
+
+header .header__menu .header__menu-logo{
+    display: none;
 }
 
 header .name-profile{
@@ -202,14 +215,67 @@ footer .footer-card__contents .icon:hover{
     color: #3c40c6;
 }
 
-
 @media screen and (max-width: 420px) {
+
+    header .header__menu nav{
+        justify-content: left;
+        margin-left: 50px;
+    }
+
+    header .header__menu.open nav{
+        margin-left: 0;
+        justify-content: center;
+        text-align: center;
+    }
+
+    header .header__menu .header__menu-logo{
+        color: #1e272e;
+        margin-left: 30px;
+        display: block;
+    }
+
+    header .header__menu.open .header__menu-logo{
+        display: none;
+    }
+
+    header .header__menu{
+        transition: ease-out .5s;
+    }
+
+    header .header__menu nav .header__menu_items ul li{
+        display: none;
+    }
+
+    header .header__menu.open{
+        height: 100vh;
+        z-index: 1;
+        transition: ease-in-out .5s;
+    }
+
+    header .header__menu.open  nav .header__menu_items ul li{
+        display: list-item;
+        margin: 30px 0;
+    }
+
+    header .header__menu #close-menu-icon{
+        display: none;
+    }
+    header .header__menu.open #close-menu-icon{
+        display: block;
+    }
+
+    header .header__menu #menu-icon{
+        display: block;
+    }
+    header .header__menu.open #menu-icon{
+       display: none;
+    }
+
     footer .container{
         flex-direction: column-reverse;
     }
 
     footer .footer-card{
         margin: 20px 50px;
-    }
-    
+    }    
 }

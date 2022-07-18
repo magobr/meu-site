@@ -88,12 +88,6 @@
     display: none;
 }
 
-.post__item .post__item_new{
-    position: absolute;
-    right: 0;
-    width: 320px;
-}
-
 .post__item .post__item_new span{
     padding: 5px;
     background: #ff5e57;
