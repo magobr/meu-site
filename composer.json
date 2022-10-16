@@ -15,6 +15,7 @@
         "pecee/simple-router": "4.3.6.1",
         "vlucas/phpdotenv": "^5.4",
         "ramsey/uuid": "^4.2",
-        "twig/twig": "^3.0"
+        "twig/twig": "^3.0",
+        "firebase/php-jwt": "^6.3"
     }
 }

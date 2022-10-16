@@ -20,6 +20,17 @@ class UserModel extends Sql
         return $sql->find($data['table'], $data['params']);
     }
 
+    static public function getForLoginUser($email, $password)
+    {
+        $data =[
+            "table" => "USER_POSTER",
+            "params"=>"WHERE USER_POSTER.email = '$email' AND USER_POSTER.senha = '$password'"
+        ];
+
+        $sql = new Sql();
+        return $sql->find($data['table'], $data['params']);
+    }
+
     static public function storeUser($valores)
     {
 
@@ -29,7 +40,6 @@ class UserModel extends Sql
             "indexCampos" => ":id, :nome, :email, :senha",
             "valores" => $valores
         ];
-
 
         $sql = new Sql();
         return $sql->store($data['table'], $data['valores'], $data['campos'], $data['indexCampos']);

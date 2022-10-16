@@ -24,6 +24,15 @@ class ViewController
         return;
     }
 
+    static function renderLogin()
+    {
+        $loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/../view');
+        $twig = new \Twig\Environment($loader);
+
+        $template = $twig->load('pages/login.twig');
+        echo $template->render();
+        return;
+    }
 
     static function errorPage()
     {
