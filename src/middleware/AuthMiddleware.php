@@ -7,18 +7,21 @@ use Pecee\Http\Middleware\IMiddleware;
 use Pecee\Http\Request;
 
 class Auth implements IMiddleware
-{
-
-    
+{   
     public function handle(Request $request): void 
     {
-    
-        if($_COOKIE['USER_LOGIN'] !== 1 && $request->getUrl() != "/admin/"){
-            $this->Redirect("/blog");
+        // Não Logado
+        if(!$this->isAuthenticated($request)){
+
+            if($_COOKIE['USER_LOGIN'] !== 1 && $request->getUrl() != "/admin/"){
+                die("não logado");
+                $this->Redirect("/admin");
+                return;
+            }
             return;
         }
-
-        return;
+        // Logado
+        $this->Redirect("/user/posts");
     }
 
     function Redirect($url, $permanent = false)
@@ -28,5 +31,13 @@ class Auth implements IMiddleware
         exit();
     }
 
+    public function isAuthenticated()
+    {
+        if($_COOKIE['USER_LOGIN'] !== "1"){
+            return false;
+        }
+        
+        return true;
+    }
    
 }
