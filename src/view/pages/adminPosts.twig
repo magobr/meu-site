@@ -6,9 +6,16 @@
     </head>
 <body>
     <section>
-        <div class="container__login">
-            <div class="container__login-title">Posts</div>
-        </div>
+            {% for content in data %}
+            <div id="{{content.user_post}}" class="content__posts__item">
+                <div class="posts__item">
+                    <div class="posts__item__titulo"><h1>{{content.created_at}}</h1></div>
+                    <div class="posts__item__info">
+                        <div class="posts__item__data">{{content.titulo}}</div>
+                        <div class="posts__item__user">{{content.user_post}}</div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
     </section>
-    <script src="/public/js/login.js"></script>
 </body>

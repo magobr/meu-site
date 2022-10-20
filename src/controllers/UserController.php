@@ -106,7 +106,7 @@ class UserController extends UserModel
             ]);
         }
 
-        $requestJwt = $this->requestJwt($userData);
+        $requestJwt = $this->requestJwt($userLogin);
         list($realHost,)=explode(':',$_SERVER['HTTP_HOST']);
 
         setcookie("USER_TOKEN", $requestJwt, time()+60*60*24*30, "/", $realHost);
@@ -130,5 +130,10 @@ class UserController extends UserModel
             "error" => false,
             "Message" => "Deslogado com Sucesso"
         ]);
+    }
+
+    public static function getUserCookie($cookie){
+        $user = JWT::decode($cookie, new key($_ENV['KEYJWT'], 'HS256') );
+        return $user;
     }
 }

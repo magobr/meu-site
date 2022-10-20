@@ -66,23 +66,23 @@ class BlogController extends PostsModel
       $result = PostsModel::findPostsByUser($id);
 
       if ($result['error']) {
-         SimpleRouter::response()->json([
+         return [
             $result
-         ]);
+         ];
       }
 
       if (sizeof($result) === 0) {
-         SimpleRouter::response()->json([
+         return [
             "error" => false,
             "data" => $result,
             "message" => "Não foi encontrado dados"
-         ]);
+         ];
       }
 
-      SimpleRouter::response()->json([
+      return [
          "error" => false,
          "data" => $result
-      ]);
+      ];
    }
 
    static public function insertPost()

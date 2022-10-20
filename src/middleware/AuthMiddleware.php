@@ -10,18 +10,23 @@ class Auth implements IMiddleware
 {   
     public function handle(Request $request): void 
     {
+        // Logado
+        if($this->isAuthenticated($request)){
+            if($request->getUrl() == "/admin/"){
+                $this->Redirect("/admin/posts");
+                return;
+            }
+            return;
+        }
+        
         // Não Logado
         if(!$this->isAuthenticated($request)){
-
             if($_COOKIE['USER_LOGIN'] !== 1 && $request->getUrl() != "/admin/"){
-                die("não logado");
                 $this->Redirect("/admin");
                 return;
             }
             return;
         }
-        // Logado
-        $this->Redirect("/user/posts");
     }
 
     function Redirect($url, $permanent = false)

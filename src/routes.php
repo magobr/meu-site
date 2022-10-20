@@ -28,14 +28,13 @@ SimpleRouter::delete('/post/delete/{id}', [BlogController::class, "purgePost", $
 // Users Api
 SimpleRouter::post('/user/new', [UserController::class, "insertUser"]);
 SimpleRouter::post('/user/login', [UserController::class, "login"]);
-SimpleRouter::get('/user/posts', [AdminController::class, "renderUserPosts"]);
 SimpleRouter::get('/user/logout', [UserController::class, "logout"]);
 
 // AdminPages
 SimpleRouter::group(["middleware" => Auth::class, "prefix" => "/admin"], function ()
 {
+    SimpleRouter::get('/posts', [AdminController::class, "renderUserPosts"]);
     SimpleRouter::get('/', [ViewController::class, "renderLogin"])->name("admin");
-    
 });
 
 // error pages
