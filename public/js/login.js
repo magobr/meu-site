@@ -56,9 +56,10 @@ formLogin.addEventListener("submit", async (e)=>{
     var values = formValue(inputs);
     var response = await apiConsume("/user/login", values);
     var cookies = getCookie("USER_TOKEN");
-    console.log(response)
-    if (!response.error) {
-        window.location.reload;
+
+    console.log(response.error)
+    if (response.error === false) {
+        window.location.reload();
     }
     
 })

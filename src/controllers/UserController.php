@@ -3,8 +3,11 @@
 namespace User\Controller;
 
 require_once __DIR__.'/../model/UserModel.php';
+require_once __DIR__.'/../services/MainService.php';
 
 use User\Model\UserModel;
+use MainService\Service\MainService;
+
 use Ramsey\Uuid\Uuid;
 use Pecee\SimpleRouter\SimpleRouter;
 use Firebase\JWT\JWT;
@@ -122,14 +125,9 @@ class UserController extends UserModel
     {
         unset($_COOKIE["USER_TOKEN"]);
         unset($_COOKIE["USER_LOGIN"]);
-
         setcookie("USER_TOKEN", null, time() - 3600, '/');
         setcookie("USER_LOGIN", null, time() - 3600, '/');
-
-        SimpleRouter::response()->httpCode(200)->json([
-            "error" => false,
-            "Message" => "Deslogado com Sucesso"
-        ]);
+        MainService::Redirect('/admin');
     }
 
     public static function getUserCookie($cookie){

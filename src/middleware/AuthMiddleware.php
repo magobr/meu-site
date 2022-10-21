@@ -2,9 +2,12 @@
 
 namespace Auth\Middleware;
 
+require_once __DIR__.'/../services/MainService.php';
+
 use Pecee\SimpleRouter\SimpleRouter;
 use Pecee\Http\Middleware\IMiddleware;
 use Pecee\Http\Request;
+use MainService\Service\MainService;
 
 class Auth implements IMiddleware
 {   
@@ -13,7 +16,7 @@ class Auth implements IMiddleware
         // Logado
         if($this->isAuthenticated($request)){
             if($request->getUrl() == "/admin/"){
-                $this->Redirect("/admin/posts");
+                MainService::Redirect("/admin/posts");
                 return;
             }
             return;
@@ -22,18 +25,11 @@ class Auth implements IMiddleware
         // Não Logado
         if(!$this->isAuthenticated($request)){
             if($_COOKIE['USER_LOGIN'] !== 1 && $request->getUrl() != "/admin/"){
-                $this->Redirect("/admin");
+                MainService::Redirect("/admin");
                 return;
             }
             return;
         }
-    }
-
-    function Redirect($url, $permanent = false)
-    {
-        header('Location: ' . $url, true, $permanent ? 301 : 302);
-
-        exit();
     }
 
     public function isAuthenticated()

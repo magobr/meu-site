@@ -25,7 +25,10 @@ class AdminController extends PostsModel
 
         $template = $twig->load('pages/adminPosts.twig');
         echo $template->render([
-            "data" => $result["data"]
+            "data" => $result["data"],
+            "user_id" => $user->{"id"},
+            "user_nome" => $user->{"nome"},
+            "user_email" => $user->{"email"}
         ]);
         return;
     }

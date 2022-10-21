@@ -2,20 +2,39 @@
 <html lang="en">
     <head>
         {% include "components/head.twig" %}
+        <link rel="stylesheet" href="/public/css/admin.css">
         {% include "utils/login.css.twig" %}
     </head>
 <body>
+    {% include "components/menuAdmin.twig" %}
+
     <section>
-            {% for content in data %}
-            <div id="{{content.user_post}}" class="content__posts__item">
-                <div class="posts__item">
-                    <div class="posts__item__titulo"><h1>{{content.created_at}}</h1></div>
-                    <div class="posts__item__info">
-                        <div class="posts__item__data">{{content.titulo}}</div>
-                        <div class="posts__item__user">{{content.user_post}}</div>
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
+        <h1>Posts</h1>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th style="width:20%">Data de Postagem</th>
+                    <th>Título</th>
+                    <th>Autor</th>
+                    <th>Ação</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for key, content in data %}
+                <tr>
+                    <td>{{key + 1}}</td>
+                    <td>{{content.created_at}}</td>
+                    <td>{{content.titulo}}</td>
+                    <td>{{content.user_post}}</td>
+                    <td></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </section>
+
+    <script src="/public/js/admin.js"></script>
 </body>
