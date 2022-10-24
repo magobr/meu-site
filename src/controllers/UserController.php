@@ -123,10 +123,11 @@ class UserController extends UserModel
 
     public function logout()
     {
+        list($realHost,)=explode(':',$_SERVER['HTTP_HOST']);
         unset($_COOKIE["USER_TOKEN"]);
         unset($_COOKIE["USER_LOGIN"]);
-        setcookie("USER_TOKEN", null, time() - 3600, '/');
-        setcookie("USER_LOGIN", null, time() - 3600, '/');
+        setcookie("USER_TOKEN", null, time() - 3600, '/', $realHost);
+        setcookie("USER_LOGIN", null, time() - 3600, '/', $realHost);
         MainService::Redirect('/admin');
     }
 
