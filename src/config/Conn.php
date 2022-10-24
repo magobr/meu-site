@@ -59,6 +59,28 @@ class Sql extends PDO
         }
     }
 
+    public function updateItem(string $tabela, array $valores, array $campos, string $params = "", array $indexCampos)
+    {
+        $strCampos = '';
+        foreach($campos as $key => $campo){
+            $strCampos .= $campo."=$indexCampos[$key], ";
+        }
+
+        $strCampos = rtrim($strCampos, ", ");
+
+        try {
+            $query = "UPDATE $tabela SET $strCampos $params";
+            $stmt = $this->conn->prepare($query);
+            return $stmt->execute($valores);
+        } catch (\Throwable $th) {
+            return [
+                "error" => true,
+                "message" => "Erro de consulta no banco de dados",
+                "Throw" => $th
+            ];
+        }
+    }
+
     public function delItem(string $tabela, array $data, string $params)
     {
         try {

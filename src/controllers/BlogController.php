@@ -6,6 +6,7 @@ require_once __DIR__.'/../model/PostsModel.php';
 
 use Posts\Model\PostsModel;
 use Pecee\SimpleRouter\SimpleRouter;
+use Pecee\Http\Request;
 use Ramsey\Uuid\Uuid;
 
 class BlogController extends PostsModel
@@ -38,6 +39,11 @@ class BlogController extends PostsModel
 
    static public function getPost($id)
    {
+      $request = new Request;
+
+      $url = $request->getUrl();
+      $url = explode("/", $url );
+
       $result = PostsModel::findPostsById($id);
 
       if ($result['error']) {
@@ -48,6 +54,11 @@ class BlogController extends PostsModel
 
       if (sizeof($result) === 0) {
          SimpleRouter::response()->redirect('/not-found');
+      }
+
+      
+      if(in_array("admin", $url)){
+         return $result;
       }
 
       $loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/../view');
@@ -66,23 +77,23 @@ class BlogController extends PostsModel
       $result = PostsModel::findPostsByUser($id);
 
       if ($result['error']) {
-         SimpleRouter::response()->json([
+         return [
             $result
-         ]);
+         ];
       }
 
       if (sizeof($result) === 0) {
-         SimpleRouter::response()->json([
+         return [
             "error" => false,
             "data" => $result,
             "message" => "Não foi encontrado dados"
-         ]);
+         ];
       }
 
-      SimpleRouter::response()->json([
+      return [
          "error" => false,
          "data" => $result
-      ]);
+      ];
    }
 
    static public function insertPost()
@@ -107,6 +118,26 @@ class BlogController extends PostsModel
      ]);
    }
 
+   static public function updatePosts($id)
+   {
+      $arrInput = json_decode(file_get_contents('php://input'));
+
+      $valores = get_object_vars($arrInput);
+      
+      $resp = PostsModel::updatePost($valores,$id);
+
+      if ($resp["error"]) {
+         SimpleRouter::response()->httpCode(200)->json([
+            $resp
+        ]);
+      }
+
+      SimpleRouter::response()->httpCode(201)->json([
+         "error" => false,
+         "Message" => "Post atualizado com sucesso"
+     ]);
+   }
+   
    static public function purgePost($id)
    {
       $post = PostsModel::findPostsById($id);

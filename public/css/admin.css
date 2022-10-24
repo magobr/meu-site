@@ -1,0 +1,141 @@
+header{
+    background: #ecf0f1;
+    margin: 0;
+    position: fixed;
+    color: #2c3e50;
+}
+
+.menu{
+    width: 100vw;
+    height: 50px;
+}
+
+.menu nav{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    margin: 0 50px;
+}
+
+.menu ul li{
+    list-style: none;
+    display: inline;
+    padding: 5px;
+    font-weight: bold;
+}
+
+section{
+    padding-top: 60px;
+    margin: 0 50px;
+}
+
+section h1{
+    margin: 30px 0;
+}
+
+table{
+    width: 100%;
+    text-align: justify;
+}
+
+table thead tr{
+    background-color: #bdc3c7;
+    color: #2c3e50;
+}
+
+table th{
+    font-size: 14px;
+    padding: 15px;
+}
+
+table td{
+    font-size: 12px;
+    padding: 15px;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #ecf0f1;
+    color: #2c3e50;
+}
+
+table, th, td {
+    border: 1px solid #7f8c8d;
+    border-collapse: collapse;
+}
+
+table tr td ul{
+    list-style-type: none;
+}
+
+table tr .cel__icons{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+}
+
+table tr td ul li{
+    list-style-type: none;
+    display: inline;
+}
+
+table tr td ul li .icon{
+    font-weight: bold;
+    font-size: 17px;
+}
+
+.icon[name=create]{
+    color: #2ecc71;
+}
+.icon[name=create]:hover{
+    color: #27ae60;
+}
+
+.icon[name=trash]{
+    color: #e74c3c;
+}
+.icon[name=trash]:hover{
+    color: #c0392b;
+}
+
+/* From */
+.input__form{
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0;
+}
+
+.input__form_field{
+    outline: none;
+    border: solid 0.5px #2980b9;
+    padding: 7px;
+    font-weight: 600;
+    font-size: 16px;
+    border-radius: 3px;
+}
+.input__form_field:focus{
+    border: solid 0.5px #2980b9;
+    box-shadow: 0px 0px 20px 1px #2980b9;
+}
+
+.input__form_btn.btn-green{
+    background: #27ae60;
+    border: #27ae60;
+    color: #ecf0f1;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.input__form_btn.btn-green:hover{
+    background: #ecf0f1;
+    border: #ecf0f1;
+    color: #27ae60;
+    font-weight: bold;
+    transition: .3s;
+}
+
+.input__form_btn.btn-green:focus{
+    box-shadow: 0px 0px 20px 1px #27ae60;
+}
