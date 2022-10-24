@@ -22,6 +22,7 @@ SimpleRouter::get('/blog/{id}', [BlogController::class, "getPost", $params]);
 // Blogs Api
 SimpleRouter::get('/blog/posts/{id}', [BlogController::class, "getPost", $params]);
 SimpleRouter::get('/blog/posts/user/{id}', [BlogController::class, "getPostByUser", $params]);
+SimpleRouter::put('/posts/{id}', [BlogController::class, "updatePosts", $params]);
 SimpleRouter::post('/post/new', [BlogController::class, "insertPost"]);
 SimpleRouter::delete('/post/delete/{id}', [BlogController::class, "purgePost", $params]);
 
@@ -34,6 +35,8 @@ SimpleRouter::get('/user/logout', [UserController::class, "logout"]);
 SimpleRouter::group(["middleware" => Auth::class, "prefix" => "/admin"], function ()
 {
     SimpleRouter::get('/posts', [AdminController::class, "renderUserPosts"]);
+    SimpleRouter::get('/posts/edit/{id}', [AdminController::class, "renderEditPosts", $params='']);
+    SimpleRouter::get('/posts/new', [AdminController::class, "renderNewPost"]);
     SimpleRouter::get('/', [ViewController::class, "renderLogin"])->name("admin");
 });
 

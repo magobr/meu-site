@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {% include "components/head.twig" %}
+        <link rel="stylesheet" href="/public/css/admin.css">
+        {% include "utils/login.css.twig" %}
+        {% include "components/headQuilljs.twig" %}
+    </head>
+<body>
+    {% include "components/menuAdmin.twig" %}
+
+    <section>
+        <h1>Novo Post</h1>
+        
+        <form id="form__post">
+            <div class="input__form">
+                <label for="titulo__form">Título</label>
+                <input class="input__form_field" type="text" id="titulo__form" value="">
+            </div>
+            <div class="input__form input__form_editor">
+                <label for="editor">Conteúdo</label>
+                <div id="toolbar"></div>
+                <div id="editor" class="editor"></div>
+            </div>
+            <input class="input__form_field input__form_btn btn-green" type="submit" value="Enviar">
+        </form> 
+
+    </section>
+    {% include "components/quilljs.twig" %}
+    <script>
+        const userId = "{{id}}";
+        var titulo__form = document.getElementById("titulo__form");
+
+        const form = document.getElementById("form__post")
+        form.addEventListener('submit', async(e)=>{
+            e.preventDefault();
+            var conteudo__from = editor.root.innerHTML;
+            var result = await consumeApi("/post/new", {
+                    titulo: titulo__form.value,
+                    conteudo: conteudo__from,
+                    user_post: userId
+                },
+                "POST"
+            )
+
+            console.log(result);
+        });
+    </script>
+
+    {% include "scripts/icons.twig" %}
+    <script src="/public/js/admin.js"></script>
+    
+</body>

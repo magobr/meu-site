@@ -11,13 +11,19 @@ use Pecee\SimpleRouter\SimpleRouter;
 
 class AdminController extends PostsModel
 {
+
+    function getUser()
+    {
+        $user = UserController::getUserCookie($_COOKIE["USER_TOKEN"]);
+        $user = get_object_vars($user);
+        return $user[0];
+    }
+
     function renderUserPosts()
     {
 
-        $user = UserController::getUserCookie($_COOKIE["USER_TOKEN"]);
-        $user = get_object_vars($user);
-        $user = $user[0];
-
+        $user = $this->getUser();
+        
         $result = BlogController::getPostByUser($user->{"id"});
 
         $loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/../view');
@@ -29,6 +35,36 @@ class AdminController extends PostsModel
             "user_id" => $user->{"id"},
             "user_nome" => $user->{"nome"},
             "user_email" => $user->{"email"}
+        ]);
+        return;
+    }
+
+    function renderEditPosts($id)
+    {
+
+        $result = BlogController::getPost($id);
+
+        $loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/../view');
+        $twig = new \Twig\Environment($loader);
+
+        $template = $twig->load('pages/adminPostsEdit.twig');
+        echo $template->render([
+            "data" => $result[0],
+            "postId" => $id
+        ]);
+        return;
+    }
+
+    function renderNewPost()
+    {
+        $user = $this->getUser();
+
+        $loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/../view');
+        $twig = new \Twig\Environment($loader);
+
+        $template = $twig->load('pages/adminPostsNew.twig');
+        echo $template->render([
+            "id" => $user->{'id'}
         ]);
         return;
     }

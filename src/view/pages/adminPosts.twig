@@ -18,7 +18,7 @@
                     <th style="width:20%">Data de Postagem</th>
                     <th>Título</th>
                     <th>Autor</th>
-                    <th>Ação</th>
+                    <th style="width:10%">Ação</th>
                 </tr>
             </thead>
 
@@ -29,7 +29,16 @@
                     <td>{{content.created_at}}</td>
                     <td>{{content.titulo}}</td>
                     <td>{{content.user_post}}</td>
-                    <td></td>
+                    <td class="cel__icons">
+                        <ul>
+                            <li>
+                                <a href="/admin/posts/edit/{{content.id}}"><ion-icon class="icon" name="create"></ion-icon></a>
+                            </li>
+                            <li>
+                                <a href="#"><ion-icon class="icon" name="trash"></ion-icon></a>
+                            </li>
+                        </ul>
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>
@@ -37,4 +46,5 @@
     </section>
 
     <script src="/public/js/admin.js"></script>
+    {% include "scripts/icons.twig" %}
 </body>
