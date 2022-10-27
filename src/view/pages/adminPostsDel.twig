@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {% include "components/head.twig" %}
+        <link rel="stylesheet" href="/public/css/admin.css">
+        {% include "utils/login.css.twig" %}
+    </head>
+<body>
+    {% include "components/menuAdmin.twig" %}
+
+    <section>
+        <h1>Deletar Post</h1>
+            <div class="input__form">
+                <label for="titulo__form">Título</label>
+                {{data.titulo|raw}}
+            </div>
+            <div class="input__form input__form_editor">
+                <label for="editor">Conteúdo</label>
+                {{data.conteudo|raw}}
+            </div>
+            <button id="btn_deletar" class="input__form_field input__form_btn btn-green" type="button">Deletar</button>
+    </section>
+
+    {% include "scripts/icons.twig" %}
+    <script src="/public/js/admin.js"></script>
+
+    <script>
+        const postId = "{{postId}}";
+
+        const btnDelete = document.getElementById("btn_deletar");
+        
+        btnDelete.addEventListener("click", async ()=>{
+            var result = await consumeApi(`/post/delete/${postId}`, null, "DELETE");
+
+            if(!result.error){
+                window.location.href = '/admin/posts';
+                return
+            }
+
+            alert("Erro ao excluir Post");
+
+            console.log(result);
+        });
+
+    </script>
+</body>

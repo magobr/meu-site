@@ -36,6 +36,7 @@ SimpleRouter::group(["middleware" => Auth::class, "prefix" => "/admin"], functio
 {
     SimpleRouter::get('/posts', [AdminController::class, "renderUserPosts"]);
     SimpleRouter::get('/posts/edit/{id}', [AdminController::class, "renderEditPosts", $params='']);
+    SimpleRouter::get('/posts/delete/{id}', [AdminController::class, "renderDelPosts", $params='']);
     SimpleRouter::get('/posts/new', [AdminController::class, "renderNewPost"]);
     SimpleRouter::get('/', [ViewController::class, "renderLogin"])->name("admin");
 });
