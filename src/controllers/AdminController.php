@@ -55,6 +55,22 @@ class AdminController extends PostsModel
         return;
     }
 
+    function renderDelPosts($id)
+    {
+
+        $result = BlogController::getPost($id);
+
+        $loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/../view');
+        $twig = new \Twig\Environment($loader);
+
+        $template = $twig->load('pages/adminPostsDel.twig');
+        echo $template->render([
+            "data" => $result[0],
+            "postId" => $id
+        ]);
+        return;
+    }
+
     function renderNewPost()
     {
         $user = $this->getUser();
