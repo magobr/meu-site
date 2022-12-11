@@ -5,6 +5,8 @@
         <link rel="stylesheet" href="/public/css/admin.css">
         {% include "utils/login.css.twig" %}
         {% include "components/headQuilljs.twig" %}
+        <script src="/public/js/modal.js"></script>
+        <script src="/public/js/alert.js"></script>
     </head>
 <body>
     {% include "components/menuAdmin.twig" %}
@@ -33,17 +35,35 @@
         const postId = "{{postId}}";
         var titulo__form = document.getElementById("titulo__form");
 
+        modalInit("Deseja Publicar esse Post");
+        alertSuccessInit("Publicação foi editada com sucesso!");
+        alertErrorInit("Publicação não foi editada!");
+
         const form = document.getElementById("form__post")
         form.addEventListener('submit', async(e)=>{
             e.preventDefault();
-            var conteudo__from = editor.root.innerHTML;
 
+            let responseModal = await modalFunction();
+
+            if (!responseModal) {
+                return
+            }
+
+            var conteudo__from = editor.root.innerHTML;
             var result = await consumeApi(`/posts/${postId}`, {
                     titulo: titulo__form.value,
                     conteudo: conteudo__from
                 },
                 "PUT"
-            )
+            );
+
+            if(result.error){
+                alertErrorFunction();
+                return
+            }
+            
+            alertSuccessFunction();
+            return
         });
     </script>
 
