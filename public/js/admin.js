@@ -1,7 +1,6 @@
 const logout = document.getElementById("logout");
 
 var consumeApi = async (url, body = null, method = "GET")=>{
-    console.log(body);
     try {
         const response = await fetch(url, {
             headers: {

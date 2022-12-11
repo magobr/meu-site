@@ -104,6 +104,20 @@ class BlogController extends PostsModel
 
       $valores = get_object_vars($arrInput);
 
+      if ($valores['titulo'] === "") {
+         SimpleRouter::response()->httpCode(200)->json([
+            "error" => true,
+            "Message" => "Preencha o campo título"
+        ]);
+      }
+
+      if ($valores['conteudo'] === "") {
+         SimpleRouter::response()->httpCode(200)->json([
+            "error" => true,
+            "Message" => "Preencha o campo conteudo"
+        ]);
+      }
+
       $resp = PostsModel::storePost($valores);
 
       if ($resp["error"]) {
@@ -123,6 +137,20 @@ class BlogController extends PostsModel
       $arrInput = json_decode(file_get_contents('php://input'));
 
       $valores = get_object_vars($arrInput);
+
+      if ($valores['titulo'] === "") {
+         SimpleRouter::response()->httpCode(200)->json([
+            "error" => true,
+            "Message" => "Preencha o campo título"
+        ]);
+      }
+
+      if ($valores['conteudo'] === "") {
+         SimpleRouter::response()->httpCode(200)->json([
+            "error" => true,
+            "Message" => "Preencha o campo conteudo"
+        ]);
+      }
       
       $resp = PostsModel::updatePost($valores,$id);
 

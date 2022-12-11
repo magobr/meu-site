@@ -4,6 +4,8 @@
         {% include "components/head.twig" %}
         <link rel="stylesheet" href="/public/css/admin.css">
         {% include "utils/login.css.twig" %}
+        <script src="/public/js/modal.js"></script>
+        <script src="/public/js/alert.js"></script>
     </head>
 <body>
     {% include "components/menuAdmin.twig" %}
@@ -28,8 +30,20 @@
         const postId = "{{postId}}";
 
         const btnDelete = document.getElementById("btn_deletar");
+
+        modalInit("Deseja deletar esse Post");
+        alertSuccessInit("Publicação foi deletada com sucesso!");
+        alertErrorInit("Publicação não foi deletada!");
         
         btnDelete.addEventListener("click", async ()=>{
+
+            let responseModal = await modalFunction();
+
+            if (!responseModal) {
+                console.log(responseModal);
+                return
+            }
+
             var result = await consumeApi(`/post/delete/${postId}`, null, "DELETE");
 
             if(!result.error){

@@ -5,6 +5,8 @@
         <link rel="stylesheet" href="/public/css/admin.css">
         {% include "utils/login.css.twig" %}
         {% include "components/headQuilljs.twig" %}
+        <script src="/public/js/modal.js"></script>
+        <script src="/public/js/alert.js"></script>
     </head>
 <body>
     {% include "components/menuAdmin.twig" %}
@@ -23,8 +25,7 @@
                 <div id="editor" class="editor"></div>
             </div>
             <input class="input__form_field input__form_btn btn-green" type="submit" value="Enviar">
-        </form> 
-
+        </form>
     </section>
     {% include "components/quilljs.twig" %}
     <script>
@@ -32,8 +33,21 @@
         var titulo__form = document.getElementById("titulo__form");
 
         const form = document.getElementById("form__post")
-        form.addEventListener('submit', async(e)=>{
+
+        modalInit("Deseja Publicar esse Post");
+        alertSuccessInit("Publicação feita com sucesso!");
+        alertErrorInit("Publicação falhou!");
+
+        form.addEventListener('submit', async (e)=>{
             e.preventDefault();
+
+            let responseModal = await modalFunction();
+
+            if (!responseModal) {
+                console.log(responseModal);
+                return
+            }
+        
             var conteudo__from = editor.root.innerHTML;
             var result = await consumeApi("/post/new", {
                     titulo: titulo__form.value,
@@ -41,9 +55,15 @@
                     user_post: userId
                 },
                 "POST"
-            )
+            );
+            
+            if(result.error){
+                alertErrorFunction();
+                return
+            }
 
-            console.log(result);
+            alertSuccessFunction();
+            return
         });
     </script>
 
