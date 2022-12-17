@@ -16,20 +16,18 @@
         <div class="container">
             <div class="content__posts">
                 {% for key, content in data %}
-                        <a href="/blog/{{content.id}}">
-                            <div class="post__item" id="{{content.id}}">
-                                {% if content.image != "" %}
-                                    <div class="post__item__img" style="margin-top: 10px;">
-                                        <img src="{{content.image}}" alt="Capa da Notícia" >
-                                    </div>
-                                {% endif %}
-                                <div class="post__item__titulo"><h1>{{content.titulo}}</h1></div>
-                                <div class="post__item__autor info">{{content.user_post}}</div>
-                                <div class="post__item__data info">{{content.created_at}}</div>
-                            </div>
-                        </a>
-                    {% endif %}
-                
+                    <a href="/blog/{{content.id}}">
+                        <div class="post__item" id="{{content.id}}">
+                            {% if content.image != "" %}
+                                <div class="post__item__img" style="margin-top: 10px;">
+                                    <img src="{{content.image}}" alt="Capa da Notícia" >
+                                </div>
+                            {% endif %}
+                            <div class="post__item__titulo"><h1>{{content.titulo}}</h1></div>
+                            <div class="post__item__autor info">{{content.user_post}}</div>
+                            <div class="post__item__data info">{{content.created_at}}</div>
+                        </div>
+                    </a>
                 {% endfor %}
             </div>
         </div>
