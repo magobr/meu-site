@@ -12,8 +12,8 @@ class PostsModel extends Sql
     {
         $data = [
             "table" => "POSTS",
-            "campos" => "POSTS.id, DATE_FORMAT(POSTS.created_at, '%d/%m/%Y') AS created_at, POSTS.titulo, USER_POSTER.nome as user_post",
-            "params"=>"INNER JOIN USER_POSTER WHERE USER_POSTER.id = POSTS.user_post ORDER BY POSTS.created_at DESC;"
+            "campos" => "POSTS.id, DATE_FORMAT(POSTS.created_at, '%d/%m/%Y') AS created_at, POSTS.titulo, USER_POSTER.nome as user_post, POSTS_COVER.image",
+            "params"=>"INNER JOIN USER_POSTER ON POSTS.user_post = USER_POSTER.id INNER JOIN POSTS_COVER ON POSTS.image = POSTS_COVER.id ORDER BY POSTS.created_at DESC"
         ];
 
         $sql = new Sql();
@@ -48,8 +48,8 @@ class PostsModel extends Sql
     {
         $data = [
             "table" => "POSTS",
-            "campos" => "id, titulo, conteudo, user_post",
-            "indexCampos" => ":id, :titulo, :conteudo, :user_post",
+            "campos" => "id, titulo, conteudo, user_post, image",
+            "indexCampos" => ":id, :titulo, :conteudo, :user_post, :image",
             "valores" => $valores
         ];
 

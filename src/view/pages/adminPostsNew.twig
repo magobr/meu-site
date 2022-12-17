@@ -19,6 +19,10 @@
                 <label for="titulo__form">Título</label>
                 <input class="input__form_field" type="text" id="titulo__form" value="">
             </div>
+            <div class="input__form">
+                <label for="titulo__form">Capa</label>
+                <input class="input__form_field" type="file" name="image" id="image" placeholder="Selecione Uma imagem" >
+            </div>
             <div class="input__form input__form_editor">
                 <label for="editor">Conteúdo</label>
                 <div id="toolbar"></div>
@@ -38,21 +42,43 @@
         alertSuccessInit("Publicação feita com sucesso!");
         alertErrorInit("Publicação falhou!");
 
+        async function sendImage() {
+            var inputImage = document.getElementById("image");
+            if (inputImage.files[0]) {
+
+                var dataImage = new FormData()
+                dataImage.append('image', inputImage.files[0]);
+
+                console.log(dataImage);
+
+                var resImage = await fetch('/image/new', {
+                    method: 'POST',
+                    body: dataImage
+                });
+
+              return await resImage.json();
+            }
+
+            return null
+        }
+
         form.addEventListener('submit', async (e)=>{
             e.preventDefault();
-
             let responseModal = await modalFunction();
 
             if (!responseModal) {
                 console.log(responseModal);
                 return
             }
-        
+
+            var resImage = await sendImage();
+            console.log(resImage);
             var conteudo__from = editor.root.innerHTML;
             var result = await consumeApi("/post/new", {
                     titulo: titulo__form.value,
                     conteudo: conteudo__from,
-                    user_post: userId
+                    user_post: userId,
+                    image: resImage != null ? resImage.id : resImage
                 },
                 "POST"
             );
