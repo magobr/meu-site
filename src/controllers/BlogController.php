@@ -128,8 +128,9 @@ class BlogController extends PostsModel
 
       SimpleRouter::response()->httpCode(201)->json([
          "error" => false,
-         "Message" => "Post publicado com sucesso"
-     ]);
+         "Message" => "Post publicado com sucesso",
+         "id" => $userUuid
+      ]);
    }
 
    static public function updatePosts($id)
