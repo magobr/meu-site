@@ -31,7 +31,7 @@ class ImageController
             ];
         }
 
-        if ($fileSize > 300000) {  //Arquivos com menos 300KB
+        if ($fileSize > 500000) {  //Arquivos com menos 300KB
             return [
                 "error" => true,
                 "message" => "Imagem maior que 300MB"

@@ -45,8 +45,11 @@
         async function sendImage() {
             var inputImage = document.getElementById("image");
             if (inputImage.files[0]) {
+
                 var dataImage = new FormData()
                 dataImage.append('image', inputImage.files[0]);
+
+                console.log(dataImage);
 
                 var resImage = await fetch('/image/new', {
                     method: 'POST',
@@ -69,7 +72,7 @@
             }
 
             var resImage = await sendImage();
-
+            console.log(resImage);
             var conteudo__from = editor.root.innerHTML;
             var result = await consumeApi("/post/new", {
                     titulo: titulo__form.value,
