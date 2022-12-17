@@ -49,7 +49,11 @@ class Sql extends PDO
         try {
             $query = "INSERT INTO $tabela ($campos) VALUES ($indexCampos)";
             $stmt = $this->conn->prepare($query);
-            return $stmt->execute($valores);
+            $stmt->execute($valores);
+            return [
+                "error" => false,
+                "message" => "Dados Inseridos com sucesso",
+            ];
         } catch (\Throwable $th) {
             return [
                 "error" => true,

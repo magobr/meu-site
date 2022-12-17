@@ -1,3 +1,7 @@
 composer.phar
 vendor
 .env
+upload/*.jpg
+upload/*.jpeg
+upload/*.png
+upload/*.gif

@@ -10,7 +10,7 @@ class PostsModel extends Sql
 {
     static public function findPosts()
     {
-        $data =[
+        $data = [
             "table" => "POSTS",
             "campos" => "POSTS.id, DATE_FORMAT(POSTS.created_at, '%d/%m/%Y') AS created_at, POSTS.titulo, USER_POSTER.nome as user_post",
             "params"=>"INNER JOIN USER_POSTER WHERE USER_POSTER.id = POSTS.user_post ORDER BY POSTS.created_at DESC;"

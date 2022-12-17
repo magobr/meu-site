@@ -2,6 +2,7 @@
 
 require_once __DIR__.'/controllers/ViewController.php';
 require_once __DIR__.'/controllers/BlogController.php';
+require_once __DIR__.'/controllers/ImageController.php';
 require_once __DIR__.'/controllers/UserController.php';
 require_once __DIR__.'/middleware/AuthMiddleware.php';
 require_once __DIR__.'/controllers/AdminController.php';
@@ -11,6 +12,7 @@ use Pecee\SimpleRouter\SimpleRouter;
 use Pecee\Http\Request;
 use View\Controller\ViewController;
 use Blog\Controller\BlogController;
+use Blog\Controller\ImageController;
 use User\Controller\UserController;
 use Auth\Middleware\Auth;
 
@@ -30,6 +32,9 @@ SimpleRouter::delete('/post/delete/{id}', [BlogController::class, "purgePost", $
 SimpleRouter::post('/user/new', [UserController::class, "insertUser"]);
 SimpleRouter::post('/user/login', [UserController::class, "login"]);
 SimpleRouter::get('/user/logout', [UserController::class, "logout"]);
+
+// Image Api
+SimpleRouter::post('/image/new', [ImageController::class, "insertImage"]);
 
 // AdminPages
 SimpleRouter::group(["middleware" => Auth::class, "prefix" => "/admin"], function ()
