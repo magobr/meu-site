@@ -21,6 +21,7 @@
                         <a href="/blog/{{content.id}}">
                             <div class="post__item" id="{{content.id}}">
                                 <div class="post__item_new"><span>New Post!</span></div>
+                                <div class="post__item__img" style="margin-top: 10px;"><img src="/public/assets/img/teste.jpg" alt="teste img" ></div>
                                 <div class="post__item__titulo"><h1>{{content.titulo}}</h1></div>
                                 <div class="post__item__autor info">{{content.user_post}}</div>
                                 <div class="post__item__data info">{{content.created_at}}</div>
@@ -29,6 +30,7 @@
                     {% else %}
                         <a href="/blog/{{content.id}}">
                             <div class="post__item" id="{{content.id}}">
+                                <div class="post__item__img"><img src="/public/assets/img/teste.jpg" alt="teste img" ></div>
                                 <div class="post__item__titulo"><h1>{{content.titulo}}</h1></div>
                                 <div class="post__item__autor info">{{content.user_post}}</div>
                                 <div class="post__item__data info">{{content.created_at}}</div>
