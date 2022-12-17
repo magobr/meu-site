@@ -6,8 +6,6 @@ require_once __DIR__.'/../model/ImageModel.php';
 
 use Image\Model\ImageModel;
 use Pecee\SimpleRouter\SimpleRouter;
-use Pecee\Http\Request;
-use Posts\Model\PostsModel;
 use Ramsey\Uuid\Uuid;
 
 class ImageController
@@ -33,7 +31,7 @@ class ImageController
             ];
         }
 
-        if ($fileSize > 300000) {
+        if ($fileSize > 300000) {  //Arquivos com menos 300KB
             return [
                 "error" => true,
                 "message" => "Imagem maior que 300MB"
@@ -50,7 +48,6 @@ class ImageController
 
         $image_base64 = base64_encode(file_get_contents($target_dir.$name));
         $image = 'data:image/'.$imageFileType.';base64,'.$image_base64;
-        // die(var_dump($image));
 
         return $image;
 
@@ -83,7 +80,7 @@ class ImageController
 
         SimpleRouter::response()->httpCode(200)->json([
             "error" => false,
-            "Message" => "Post publicado com sucesso",
+            "Message" => "Imagem inserida com sucesso",
             "id" => $imageUuid
         ]);
     }

@@ -48,8 +48,8 @@ class PostsModel extends Sql
     {
         $data = [
             "table" => "POSTS",
-            "campos" => "id, titulo, conteudo, user_post",
-            "indexCampos" => ":id, :titulo, :conteudo, :user_post",
+            "campos" => "id, titulo, conteudo, user_post, image",
+            "indexCampos" => ":id, :titulo, :conteudo, :user_post, :image",
             "valores" => $valores
         ];
 
