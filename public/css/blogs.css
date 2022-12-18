@@ -4,7 +4,6 @@
     align-items: flex-start;
     align-content: flex-start;
     justify-content: start;
-    width: 70vw;
     margin: 0 auto;
 }
 
@@ -119,6 +118,11 @@
 }
 
 @media screen and (max-width: 420px) {
+
+    .content__posts{
+        justify-content: center;
+    }
+    
     .post__item {
         width: 315px;
     }
