@@ -15,7 +15,7 @@
     <section>
         <div class="container">
             <div class="content__posts">
-                {% for key, content in data %}
+                {% for key, content in data %}                   
                     <a href="/blog/{{content.id}}">
                         <div class="post__item" id="{{content.id}}">
                             {% if content.image != "" %}

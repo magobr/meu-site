@@ -20,11 +20,7 @@ class BlogController extends PostsModel
             $result
          ]);
       }
-
-      if (sizeof($result) === 0) {
-         SimpleRouter::response()->redirect('/not-found');
-      }
-
+        
       $loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/../view');
       $twig = new \Twig\Environment($loader);
 
