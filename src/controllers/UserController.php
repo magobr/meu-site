@@ -117,7 +117,8 @@ class UserController extends UserModel
 
         SimpleRouter::response()->httpCode(200)->json([
             "error" => false,
-            "Message" => "Logado com Sucesso"
+            "Message" => "Logado com Sucesso",
+            "data" => $userLogin
         ]);
     }
 
