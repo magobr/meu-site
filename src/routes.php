@@ -5,6 +5,7 @@ require_once __DIR__.'/controllers/BlogController.php';
 require_once __DIR__.'/controllers/ImageController.php';
 require_once __DIR__.'/controllers/UserController.php';
 require_once __DIR__.'/middleware/AuthMiddleware.php';
+require_once __DIR__.'/middleware/UserAccessMiddleware.php';
 require_once __DIR__.'/controllers/AdminController.php';
 
 use Admin\Controller\AdminController;
@@ -15,6 +16,7 @@ use Blog\Controller\BlogController;
 use Blog\Controller\ImageController;
 use User\Controller\UserController;
 use Auth\Middleware\Auth;
+use UserAccess\Middleware\UserAccess;
 
 // Render Pages
 SimpleRouter::get('/', [ViewController::class, "renderPage"]);
@@ -39,6 +41,13 @@ SimpleRouter::post('/image/new', [ImageController::class, "insertImage"]);
 // AdminPages
 SimpleRouter::group(["middleware" => Auth::class, "prefix" => "/admin"], function ()
 {
+
+    // SimpleRouter::group(["middleware" => UserAccess::class], function (){
+    //     SimpleRouter::get('/teste', function(){ 
+    //         die('teste');
+    //     });
+    // });    
+
     SimpleRouter::get('/posts', [AdminController::class, "renderUserPosts"]);
     SimpleRouter::get('/posts/edit/{id}', [AdminController::class, "renderEditPosts", $params='']);
     SimpleRouter::get('/posts/delete/{id}', [AdminController::class, "renderDelPosts", $params='']);

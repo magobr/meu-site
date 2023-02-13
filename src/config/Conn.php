@@ -29,7 +29,7 @@ class Sql extends PDO
 
     }
 
-    public function find(string $tabela, string $params = "", $campos = " * ")
+    public function find(string $tabela, string $params = "", string $campos = " * ")
     {
         try {
             $query = "SELECT $campos FROM $tabela $params;";

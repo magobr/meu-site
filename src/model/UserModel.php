@@ -23,12 +23,13 @@ class UserModel extends Sql
     static public function getForLoginUser($email, $password)
     {
         $data =[
+            "campos" => "id, nome, email, created_at, acesso",
             "table" => "USER_POSTER",
             "params"=>"WHERE USER_POSTER.email = '$email' AND USER_POSTER.senha = '$password'"
         ];
 
         $sql = new Sql();
-        return $sql->find($data['table'], $data['params']);
+        return $sql->find($data['table'], $data['params'], $data['campos']);
     }
 
     static public function storeUser($valores)
