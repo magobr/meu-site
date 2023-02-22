@@ -4,7 +4,9 @@
                 <ul>
                     <li><a href="/admin/posts">Posts</a></li>
                     <li><a href="/admin/posts/new">Novo Post</a></li>
+                    {% if user_acesso == acessos.admin %}
                     <li><a href="#">Usuários</a></li>
+                    {% endif %}
                 </ul>
                 <div id="logout" class="logout"><a href="/user/logout"><ion-icon name="exit"></ion-icon></a></div>
             </nav>
