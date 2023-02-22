@@ -4,6 +4,7 @@ namespace Admin\Controller;
 
 require_once __DIR__.'/../model/PostsModel.php';
 
+use Access\Service\AccessService;
 use Blog\Controller\BlogController;
 use User\Controller\UserController;
 use Posts\Model\PostsModel;
@@ -21,7 +22,6 @@ class AdminController extends PostsModel
 
     function renderUserPosts()
     {
-
         $user = $this->getUser();
         
         $result = BlogController::getPostByUser($user->{"id"});
@@ -29,12 +29,16 @@ class AdminController extends PostsModel
         $loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/../view');
         $twig = new \Twig\Environment($loader);
 
+        $access = AccessService::getAccess();
+
         $template = $twig->load('pages/adminPosts.twig');
         echo $template->render([
             "data" => $result["data"],
             "user_id" => $user->{"id"},
             "user_nome" => $user->{"nome"},
-            "user_email" => $user->{"email"}
+            "user_email" => $user->{"email"},
+            "user_acesso" => $user->{"acesso"},
+            "acessos" => $access
         ]);
         return;
     }
@@ -47,10 +51,13 @@ class AdminController extends PostsModel
         $loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/../view');
         $twig = new \Twig\Environment($loader);
 
+        $access = AccessService::getAccess();
+
         $template = $twig->load('pages/adminPostsEdit.twig');
         echo $template->render([
             "data" => $result[0],
-            "postId" => $id
+            "postId" => $id,
+            "acessos" => $access
         ]);
         return;
     }
@@ -63,10 +70,13 @@ class AdminController extends PostsModel
         $loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/../view');
         $twig = new \Twig\Environment($loader);
 
+        $access = AccessService::getAccess();
+
         $template = $twig->load('pages/adminPostsDel.twig');
         echo $template->render([
             "data" => $result[0],
-            "postId" => $id
+            "postId" => $id,
+            "acessos" => $access
         ]);
         return;
     }

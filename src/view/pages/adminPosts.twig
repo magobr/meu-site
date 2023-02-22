@@ -34,9 +34,11 @@
                             <li>
                                 <a href="/admin/posts/edit/{{content.id}}"><ion-icon class="icon" name="create"></ion-icon></a>
                             </li>
+                            {% if user_acesso == acessos.admin %}
                             <li>
                                 <a href="/admin/posts/delete/{{content.id}}"><ion-icon class="icon" name="trash"></ion-icon></a>
                             </li>
+                            {% endif %}
                         </ul>
                     </td>
                 </tr>
