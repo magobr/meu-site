@@ -34,6 +34,9 @@ SimpleRouter::delete('/post/delete/{id}', [BlogController::class, "purgePost", $
 
 // Users Api
 SimpleRouter::post('/user/new', [UserController::class, "insertUser"]);
+SimpleRouter::put('/user/update/{id}', [UserController::class, "update", $params]);
+SimpleRouter::put('/user/update/pass/{id}', [UserController::class, "updatePassword", $params]);
+SimpleRouter::delete('/user/delete/{id}', [UserController::class, "delete", $params]);
 SimpleRouter::post('/user/login', [UserController::class, "login"]);
 SimpleRouter::get('/user/logout', [UserController::class, "logout"]);
 

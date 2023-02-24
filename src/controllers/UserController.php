@@ -19,9 +19,10 @@ class UserController extends UserModel
     static public function insertUser()
     {
         $str_json = json_decode(file_get_contents('php://input'));
+        $valores = get_object_vars($str_json);
         $userUuid = Uuid::uuid4();
 
-        $userExists = UserModel::getUser($str_json->{'email'});
+        $userExists = UserModel::getUser($str_json->{'email'}, "email");
 
         if ($userExists['error']) {
             SimpleRouter::response()->json([
@@ -36,18 +37,104 @@ class UserController extends UserModel
             ]);
         }
 
-        $data = [
-            "id"=> $userUuid->toString(),
-            "nome" => $str_json->{'nome'},
-            "email" => $str_json->{'email'},
-            "senha" => md5($str_json->{'senha'})
-        ];
+        $valores["id"] = $userUuid->toString();
+        $valores["senha"] = md5($valores["senha"]);
 
-        UserModel::storeUser($data);
+        UserModel::storeUser($valores);
 
         SimpleRouter::response()->httpCode(201)->json([
             "error" => false,
             "Message" => "Usuário cadastrado com sucesso"
+        ]);
+    }
+
+    static public function update($id)
+    {
+        $str_json = json_decode(file_get_contents('php://input'));
+        $valores = get_object_vars($str_json);
+
+        if ($valores["nome"] == "" OR !$valores["nome"]) {
+            SimpleRouter::response()->json([
+                "error" => true,
+                "message" => "Preencha o campo Nome"
+            ]);
+        }
+
+        if ($valores["email"] == "" OR !$valores["email"]) {
+            SimpleRouter::response()->json([
+                "error" => true,
+                "message" => "Preencha o campo Email"
+            ]);
+        }
+
+        $resp = UserModel::updateUser($valores, $id);
+
+        if ($resp["error"]) {
+            SimpleRouter::response()->httpCode(200)->json([$resp]);
+        }
+
+        SimpleRouter::response()->httpCode(201)->json([
+            "error" => false,
+            "Message" => "Usuário Atualizado com sucesso"
+        ]);
+    }
+
+    static public function updatePassword($id)
+    {
+        $str_json = json_decode(file_get_contents('php://input'));
+        $valores = get_object_vars($str_json);
+
+        $valores["senha"] = md5($valores["senha"]);
+
+        if ($valores["senha"] == "" OR !$valores["senha"]) {
+            SimpleRouter::response()->json([
+                "error" => true,
+                "message" => "Preencha o campo Senha"
+            ]);
+        }
+
+        $resp = UserModel::updateUserPassword($valores, $id);
+
+        if ($resp["error"]) {
+            SimpleRouter::response()->httpCode(200)->json([$resp]);
+        }
+
+        SimpleRouter::response()->httpCode(201)->json([
+            "error" => false,
+            "Message" => "Senha Atualizado com sucesso"
+        ]);
+    }
+    
+    static public function delete($id)
+    {
+        $user = UserModel::getUser($id, "id");
+
+        if ($user['error']) {
+            SimpleRouter::response()->json([
+                $user
+            ]);
+        }
+        
+        if (sizeof($user) === 0) {
+            SimpleRouter::response()->json([
+                "error" => false,
+                "data" => $user,
+                "message" => "Não foi encontrado dados"
+            ]);
+        }
+        
+        $result = UserModel::deleteUser($id);
+
+        if ($result > 0) {
+            SimpleRouter::response()->httpCode(202)->json([
+                "error" => false,
+                "Message" => "Usuario deletado com sucesso"
+            ]);
+        }
+
+        SimpleRouter::response()->httpCode(202)->json([
+            "error" => true,
+            "Message" => "Erro ao executar essa ação"
         ]);
     }
 
@@ -85,7 +172,7 @@ class UserController extends UserModel
             ]);
         }
 
-        $userExists = UserModel::getUser($userData["email"]);
+        $userExists = UserModel::getUser($userData["email"], "email");
         
         if (count($userExists) === 0) {
             SimpleRouter::response()->httpCode(409)->json([
