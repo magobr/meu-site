@@ -168,7 +168,7 @@ class UserController extends UserModel
         if (!$dataTrue) {
             SimpleRouter::response()->httpCode(409)->json([
                 "error" => true,
-                "Message" => $dataError
+                "message" => $dataError
             ]);
         }
 
@@ -177,7 +177,7 @@ class UserController extends UserModel
         if (count($userExists) === 0) {
             SimpleRouter::response()->httpCode(409)->json([
                 "error" => true,
-                "Message" => "Usuário não cadastrado"
+                "message" => "Usuário não cadastrado"
             ]);
         }
 
@@ -192,7 +192,7 @@ class UserController extends UserModel
         if (count($userLogin) === 0) {
             SimpleRouter::response()->httpCode(409)->json([
                 "error" => true,
-                "Message" => "E-mail ou Senha inválidos"
+                "message" => "E-mail ou Senha inválidos"
             ]);
         }
 
@@ -204,7 +204,7 @@ class UserController extends UserModel
 
         SimpleRouter::response()->httpCode(200)->json([
             "error" => false,
-            "Message" => "Logado com Sucesso",
+            "message" => "Logado com Sucesso",
             "data" => $userLogin
         ]);
     }

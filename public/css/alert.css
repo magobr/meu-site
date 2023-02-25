@@ -1,24 +1,26 @@
 /* Modal */
 .alert_success {
-    top: 75px;
+    top: 20px;
     right: 10px;
     position: fixed;
-    background: #27ae60e0;
+    background: #27ae5f;
     border-top-right-radius: 0;
     border-top-left-radius: 0;
     border-bottom-right-radius: 3px;
     border-bottom-left-radius: 3px;
+    z-index: 2;
 }
 
 .alert_error {
-    top: 75px;
+    top: 20px;
     right: 10px;
     position: fixed;
-    background: #c0392be0;
+    background: #c03a2b;
     border-top-right-radius: 0;
     border-top-left-radius: 0;
     border-bottom-right-radius: 3px;
     border-bottom-left-radius: 3px;
+    z-index: 2;
 }
 
 .line_time {
