@@ -2,7 +2,7 @@ const inputs = document.querySelectorAll("input");
 const formLogin = document.querySelector("#form_login");
 
 const formValidate = function (input) {
-    if (input.value == "" || input.type == "submit") {
+    if (input.value == "" && input.type != "submit") {
         return false
     }
     return true
@@ -12,13 +12,40 @@ const formValue = function (inputs) {
     let res = {
         user: {}
     };
+
+    let retorno = true;
+    let errorMessage = [];
+    
     for(itemInput of inputs){
-        var inputValid = formValidate(itemInput);
-        if(inputValid){
-            res.user[itemInput.name] = itemInput.value
+
+        if(!formValidate(itemInput)){
+            setErrorInputs(itemInput);
+            errorMessage.push(`Preencha o campo ${itemInput.name}`);
+            retorno = false;
         }
+
+        if (retorno) {
+            setSuccessInputs(itemInput);
+        }
+
+        res.user[itemInput.name] = itemInput.value;
     }
+
+    if(!retorno){
+        alertErrorInit(messageFilter(errorMessage));
+        alertErrorFunction();
+        return retorno;
+    }
+
     return res;
+}
+
+const setErrorInputs = (input)=>{
+    input.classList.add("form__error");    
+}
+
+const setSuccessInputs = (input)=>{
+    input.classList.remove("form__error");    
 }
 
 const apiConsume = async function (url, body) {
@@ -51,15 +78,41 @@ const getCookie = function (cname) {
     return false;
 }
 
+const messageFilter = (arrStr)=>{
+    if (!Array.isArray(arrStr)) {
+        return arrStr;
+    }
+    
+    let messages = "";
+    arrStr.map((message)=>{
+        messages += `<p>${message}</p>`;
+    });
+    return messages;
+}
+
 formLogin.addEventListener("submit", async (e)=>{
     e.preventDefault();
     var values = formValue(inputs);
-    var response = await apiConsume("/user/login", values);
+
+    if (!values)
+        return false;
+
+    var response = await apiConsume("/user/login", values);        
     var cookies = getCookie("USER_TOKEN");
 
-    console.log(response.error)
     if (response.error === false) {
-        window.location.reload();
+        alertSuccessInit(response.message);
+        const alertResponse = await alertSuccessFunction();
+
+        if(alertResponse){
+            window.location.reload();
+        }
+
+        return;
     }
-    
-})
+
+    let messageField = messageFilter(response.message);
+
+    alertErrorInit(messageField);
+    alertErrorFunction();
+});

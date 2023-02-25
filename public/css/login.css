@@ -37,7 +37,7 @@
     outline: none;
 }
 
-.form__input::-webkit-input-placeholder {
+.form__input::placeholder {
     color: #2c3e50;
     font-weight: bold;
 }
@@ -53,6 +53,7 @@
     color: #ecf0f1;
     font-weight: bold;
     cursor: pointer;
+    margin-top: 10px;
 }
 
 .form__input.btn-green:hover{
@@ -65,4 +66,15 @@
 
 .form__input.btn-green:focus{
     box-shadow: 0px 0px 20px 1px #27ae60;
+}
+
+.form__input.form__error{
+    box-shadow: 0px 0px 20px 1px #f10f0f;
+    border: solid 0.5px #f31212;
+    color: #c0392b;
+}
+
+.form__input.form__error::placeholder{
+    color: #502c2c;
+    font-weight: bold;
 }

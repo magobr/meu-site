@@ -44,44 +44,50 @@ const startTimer = (lineTimeBar) => {
                 lineBarSize = 0;
                 return resolve(true) 
             }
-        }, 50);
+        }, 7);
     })
 }
 
 const alertSuccessFunction = async () =>{
+    let response = true;
     let alertElement = document.querySelector(`#alert_element`);
     alertElement.classList.remove("alert_hide");
 
     const alertClose = document.querySelector(`#alert_close`);
 
     alertClose.addEventListener("click", (e)=>{
-        alertElement.classList.add("alert_hide");
+        alertElement.remove();
+        return response;
     });
 
     var display = document.querySelector('#line_time');
     var resTimer = await startTimer(display);
     if (resTimer) {
-        alertElement.classList.add("alert_hide");
+        alertElement.remove();
         clearInterval(idInterval);
         display.style.width = "100%"
     }
+    return response;
 };
 
 const alertErrorFunction = async () =>{
+    let response = true;
     let alertElement = document.querySelector(`#alert_element-error`);
     alertElement.classList.remove("alert_hide-error");
 
     const alertClose = document.querySelector(`#alert_close-error`);
 
     alertClose.addEventListener("click", (e)=>{
-        alertElement.classList.add("alert_hide-error");
+        alertElement.remove()
+        return response
     });
 
     var display = document.querySelector('#line_time-error');
     var resTimer = await startTimer(display);
     if (resTimer) {
-        alertElement.classList.add("alert_hide-error");
+        alertElement.remove()
         clearInterval(idInterval);
         display.style.width = "100%"
     }
+    return response
 };
