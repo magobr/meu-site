@@ -16,9 +16,9 @@ class UserModel extends Sql
 
         $data = [
             "table" => self::TABLE,
-            "params"=>"WHERE USER_POSTER.$field = :$value",
+            "params"=>"WHERE USER_POSTER.$field = :$field",
             "values" => [
-                "$value" => $value
+                "$field" => $value
             ]
         ];
 
