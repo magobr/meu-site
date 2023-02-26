@@ -23,7 +23,6 @@ class UserController extends UserModel
         $userUuid = Uuid::uuid4();
 
         $userExists = UserModel::getUser($str_json->{'email'}, "email");
-
         if ($userExists['error']) {
             SimpleRouter::response()->json([
                 $userExists
