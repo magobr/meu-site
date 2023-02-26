@@ -13,13 +13,17 @@ class UserModel extends Sql
 
     static public function getUser($value, $field)
     {
-        $data =[
+
+        $data = [
             "table" => self::TABLE,
-            "params"=>"WHERE USER_POSTER.$field = '$value'"
+            "params"=>"WHERE USER_POSTER.$field = :$value",
+            "values" => [
+                "$value" => $value
+            ]
         ];
 
         $sql = new Sql();
-        return $sql->find($data['table'], $data['params']);
+        return $sql->find($data['table'], $data["values"], $data['params']);
     }
 
     static public function getForLoginUser($email, $password)
@@ -27,11 +31,15 @@ class UserModel extends Sql
         $data =[
             "campos" => "id, nome, email, created_at, acesso",
             "table" => self::TABLE,
-            "params"=>"WHERE USER_POSTER.email = '$email' AND USER_POSTER.senha = '$password'"
+            "params"=>"WHERE USER_POSTER.email = :email AND USER_POSTER.senha = :senha",
+            "values" => [
+                "email" => $email,
+                "senha" => $password
+            ]
         ];
 
         $sql = new Sql();
-        return $sql->find($data['table'], $data['params'], $data['campos']);
+        return $sql->find($data['table'], $data["values"], $data['params'], $data['campos']);
     }
 
     static public function storeUser($valores)

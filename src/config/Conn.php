@@ -29,12 +29,13 @@ class Sql extends PDO
 
     }
 
-    public function find(string $tabela, string $params = "", string $campos = " * ")
+    public function find(string $tabela, array $values = [], string $params = "", string $campos = " * ")
     {
         try {
-            $query = "SELECT $campos FROM $tabela $params;";
-            $stmt = $this->conn->query($query); 
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $query = "SELECT $campos FROM $tabela $params";
+            $stmt = $this->conn->prepare($query);
+            $stmt->execute($values);
+            return $stmt->fetchAll();
         } catch (\Throwable $th) {
             return [
                 "error" => true,

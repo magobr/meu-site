@@ -13,11 +13,12 @@ class PostsModel extends Sql
         $data = [
             "table" => "POSTS",
             "campos" => "POSTS.id, DATE_FORMAT(POSTS.created_at, '%d/%m/%Y') AS created_at, POSTS.titulo, USER_POSTER.nome as user_post, POSTS_COVER.image",
-            "params"=>"INNER JOIN USER_POSTER ON POSTS.user_post = USER_POSTER.id LEFT JOIN POSTS_COVER ON POSTS.image = POSTS_COVER.id ORDER BY POSTS.created_at DESC"
+            "params"=>"INNER JOIN USER_POSTER ON POSTS.user_post = USER_POSTER.id LEFT JOIN POSTS_COVER ON POSTS.image = POSTS_COVER.id ORDER BY POSTS.created_at DESC",
+            "values" => []
         ];
 
         $sql = new Sql();
-        return $sql->find($data['table'], $data['params'], $data['campos']);
+        return $sql->find($data['table'], $data["values"], $data['params'], $data['campos']);
     }
 
     static public function findPostsById($id)
@@ -25,11 +26,14 @@ class PostsModel extends Sql
         $data =[
             "table" => "POSTS",
             "campos" => "POSTS.id, DATE_FORMAT(POSTS.created_at, '%d/%m/%Y') AS created_at, POSTS.titulo, POSTS.conteudo, USER_POSTER.nome AS user_post",
-            "params"=>"INNER JOIN USER_POSTER ON POSTS.user_post = USER_POSTER.id WHERE POSTS.id = '$id'"
+            "params"=> "INNER JOIN USER_POSTER ON POSTS.user_post = USER_POSTER.id WHERE POSTS.id = :id",
+            "values" => [
+                "id" => $id
+            ]
         ];
 
         $sql = new Sql();
-        return $sql->find($data['table'], $data['params'], $data['campos']);
+        return $sql->find($data['table'], $data["values"], $data['params'], $data['campos']);
     }
 
     static public function findPostsByUser($id)
@@ -37,11 +41,14 @@ class PostsModel extends Sql
         $data =[
             "table" => "POSTS",
             "campos" => "POSTS.id, DATE_FORMAT(POSTS.created_at, '%d/%m/%Y') AS created_at, POSTS.titulo, USER_POSTER.nome as user_post",
-            "params"=>"INNER JOIN USER_POSTER ON POSTS.user_post = USER_POSTER.id WHERE USER_POSTER.id = '$id' ORDER BY POSTS.created_at DESC;"
+            "params"=>"INNER JOIN USER_POSTER ON POSTS.user_post = USER_POSTER.id WHERE USER_POSTER.id = :id ORDER BY POSTS.created_at DESC;",
+            "values" => [
+                "id" => $id
+            ]
         ];
 
         $sql = new Sql();
-        return $sql->find($data['table'], $data['params'], $data['campos']);
+        return $sql->find($data['table'], $data["values"], $data['params'], $data['campos']);
     }
 
     static public function storePost($valores)
