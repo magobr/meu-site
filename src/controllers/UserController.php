@@ -71,7 +71,7 @@ class UserController extends UserModel
 
         $resp = UserModel::updateUser($valores, $id);
 
-        if ($resp["error"]) {
+        if (isset($resp["error"])) {
             SimpleRouter::response()->httpCode(200)->json([$resp]);
         }
 
@@ -97,7 +97,7 @@ class UserController extends UserModel
 
         $resp = UserModel::updateUserPassword($valores, $id);
 
-        if ($resp["error"]) {
+        if (isset($resp["error"])) {
             SimpleRouter::response()->httpCode(200)->json([$resp]);
         }
 
@@ -111,7 +111,7 @@ class UserController extends UserModel
     {
         $user = UserModel::getUser($id, "id");
 
-        if ($user['error']) {
+        if (isset($user['error'])) {
             SimpleRouter::response()->json([
                 $user
             ]);

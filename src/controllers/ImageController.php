@@ -72,7 +72,7 @@ class ImageController
             "image" => $validImage
         ]);
 
-        if ($resp['error']) {
+        if (isset($resp['error'])) {
             SimpleRouter::response()->httpCode(200)->json([
                 $resp
             ]);

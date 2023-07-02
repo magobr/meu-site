@@ -15,7 +15,7 @@ class BlogController extends PostsModel
    {
       $result = PostsModel::findPosts();
 
-      if ($result['error']) {
+      if (isset($result['error'])) {
          SimpleRouter::response()->json([
             $result
          ]);
@@ -116,7 +116,7 @@ class BlogController extends PostsModel
 
       $resp = PostsModel::storePost($valores);
 
-      if ($resp["error"]) {
+      if (isset($resp["error"])) {
          SimpleRouter::response()->httpCode(200)->json([
             $resp
         ]);
@@ -151,7 +151,7 @@ class BlogController extends PostsModel
       
       $resp = PostsModel::updatePost($valores,$id);
 
-      if ($resp["error"]) {
+      if (isset($resp["error"])) {
          SimpleRouter::response()->httpCode(200)->json([
             $resp
         ]);
@@ -167,7 +167,7 @@ class BlogController extends PostsModel
    {
       $post = PostsModel::findPostsById($id);
 
-      if ($post['error']) {
+      if (isset($post['error'])) {
          SimpleRouter::response()->json([
             $post
          ]);

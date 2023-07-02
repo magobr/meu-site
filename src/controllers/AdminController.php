@@ -8,7 +8,6 @@ use Access\Service\AccessService;
 use Blog\Controller\BlogController;
 use User\Controller\UserController;
 use Posts\Model\PostsModel;
-use Pecee\SimpleRouter\SimpleRouter;
 
 class AdminController extends PostsModel
 {
