@@ -23,7 +23,7 @@ class UserController extends UserModel
         $userUuid = Uuid::uuid4();
 
         $userExists = UserModel::getUser($str_json->{'email'}, "email");
-        if ($userExists['error']) {
+        if (isset($userExists['error'])) {
             SimpleRouter::response()->json([
                 $userExists
             ]);
@@ -39,7 +39,10 @@ class UserController extends UserModel
         $valores["id"] = $userUuid->toString();
         $valores["senha"] = md5($valores["senha"]);
 
-        UserModel::storeUser($valores);
+        
+        $resp = UserModel::storeUser($valores);
+
+        die(var_dump($resp));
 
         SimpleRouter::response()->httpCode(201)->json([
             "error" => false,
@@ -182,7 +185,7 @@ class UserController extends UserModel
 
         $userLogin = UserModel::getForLoginUser($userData["email"], md5($userData["senha"]));
 
-        if ($userLogin['error']) {
+        if (isset($userLogin['error'])) {
             SimpleRouter::response()->json([
                 $userLogin
             ]);

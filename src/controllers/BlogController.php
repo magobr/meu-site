@@ -72,7 +72,7 @@ class BlogController extends PostsModel
    {
       $result = PostsModel::findPostsByUser($id);
 
-      if ($result['error']) {
+      if (isset($result['error'])) {
          return [
             $result
          ];

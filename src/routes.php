@@ -23,20 +23,20 @@ use UserAccessWriter\Middleware\UserAccessWriter;
 // Render Pages
 SimpleRouter::get('/', [ViewController::class, "renderPage"]);
 SimpleRouter::get('/blog', [BlogController::class, "getPosts"]);
-SimpleRouter::get('/blog/{id}', [BlogController::class, "getPost", $params]);
+SimpleRouter::get('/blog/{id}', [BlogController::class, "getPost", $params='']);
 
 // Blogs Api
-SimpleRouter::get('/blog/posts/{id}', [BlogController::class, "getPost", $params]);
-SimpleRouter::get('/blog/posts/user/{id}', [BlogController::class, "getPostByUser", $params]);
-SimpleRouter::put('/posts/{id}', [BlogController::class, "updatePosts", $params]);
+SimpleRouter::get('/blog/posts/{id}', [BlogController::class, "getPost", $params='']);
+SimpleRouter::get('/blog/posts/user/{id}', [BlogController::class, "getPostByUser", $params='']);
+SimpleRouter::put('/posts/{id}', [BlogController::class, "updatePosts", $params='']);
 SimpleRouter::post('/post/new', [BlogController::class, "insertPost"]);
-SimpleRouter::delete('/post/delete/{id}', [BlogController::class, "purgePost", $params]);
+SimpleRouter::delete('/post/delete/{id}', [BlogController::class, "purgePost", $params='']);
 
 // Users Api
 SimpleRouter::post('/user/new', [UserController::class, "insertUser"]);
-SimpleRouter::put('/user/update/{id}', [UserController::class, "update", $params]);
-SimpleRouter::put('/user/update/pass/{id}', [UserController::class, "updatePassword", $params]);
-SimpleRouter::delete('/user/delete/{id}', [UserController::class, "delete", $params]);
+SimpleRouter::put('/user/update/{id}', [UserController::class, "update", $params='']);
+SimpleRouter::put('/user/update/pass/{id}', [UserController::class, "updatePassword", $params='']);
+SimpleRouter::delete('/user/delete/{id}', [UserController::class, "delete", $params='']);
 SimpleRouter::post('/user/login', [UserController::class, "login"]);
 SimpleRouter::get('/user/logout', [UserController::class, "logout"]);
 
