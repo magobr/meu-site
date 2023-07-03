@@ -44,18 +44,21 @@ class AdminController extends PostsModel
 
     function renderEditPosts($id)
     {
-
+        $user = $this->getUser();
+        
         $result = BlogController::getPost($id);
 
         $loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/../view');
         $twig = new \Twig\Environment($loader);
 
         $access = AccessService::getAccess();
+        // die(var_dump($access));
 
         $template = $twig->load('pages/adminPostsEdit.twig');
         echo $template->render([
             "data" => $result[0],
             "postId" => $id,
+            "user_acesso" => $user->{"acesso"},
             "acessos" => $access
         ]);
         return;
@@ -63,6 +66,7 @@ class AdminController extends PostsModel
 
     function renderDelPosts($id)
     {
+        $user = $this->getUser();
 
         $result = BlogController::getPost($id);
 
@@ -75,6 +79,7 @@ class AdminController extends PostsModel
         echo $template->render([
             "data" => $result[0],
             "postId" => $id,
+            "user_acesso" => $user->{"acesso"},
             "acessos" => $access
         ]);
         return;
