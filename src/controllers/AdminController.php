@@ -52,7 +52,6 @@ class AdminController extends PostsModel
         $twig = new \Twig\Environment($loader);
 
         $access = AccessService::getAccess();
-        // die(var_dump($access));
 
         $template = $twig->load('pages/adminPostsEdit.twig');
         echo $template->render([
