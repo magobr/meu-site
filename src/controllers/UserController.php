@@ -23,7 +23,7 @@ class UserController extends UserModel
         $userUuid = Uuid::uuid4();
 
         $userExists = UserModel::getUser($str_json->{'email'}, "email");
-        if (isset($userExists['error'])) {
+        if (isset($userExists['error']) && $userExists['error']) {
             SimpleRouter::response()->json([
                 $userExists
             ]);
@@ -41,8 +41,6 @@ class UserController extends UserModel
 
         
         $resp = UserModel::storeUser($valores);
-
-        die(var_dump($resp));
 
         SimpleRouter::response()->httpCode(201)->json([
             "error" => false,
@@ -71,8 +69,8 @@ class UserController extends UserModel
 
         $resp = UserModel::updateUser($valores, $id);
 
-        if (isset($resp["error"])) {
-            SimpleRouter::response()->httpCode(200)->json([$resp]);
+        if (isset($resp["error"]) && $resp["error"]) {
+            SimpleRouter::response()->httpCode(400)->json([$resp]);
         }
 
         SimpleRouter::response()->httpCode(201)->json([
@@ -97,8 +95,8 @@ class UserController extends UserModel
 
         $resp = UserModel::updateUserPassword($valores, $id);
 
-        if (isset($resp["error"])) {
-            SimpleRouter::response()->httpCode(200)->json([$resp]);
+        if (isset($resp["error"]) && $resp["error"]) {
+            SimpleRouter::response()->httpCode(400)->json([$resp]);
         }
 
         SimpleRouter::response()->httpCode(201)->json([
@@ -111,7 +109,7 @@ class UserController extends UserModel
     {
         $user = UserModel::getUser($id, "id");
 
-        if (isset($user['error'])) {
+        if (isset($user['error']) && $user['error']) {
             SimpleRouter::response()->json([
                 $user
             ]);
@@ -185,7 +183,7 @@ class UserController extends UserModel
 
         $userLogin = UserModel::getForLoginUser($userData["email"], md5($userData["senha"]));
 
-        if (isset($userLogin['error'])) {
+        if (isset($userLogin['error']) && $userLogin['error']) {
             SimpleRouter::response()->json([
                 $userLogin
             ]);
