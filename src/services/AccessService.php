@@ -1,12 +1,12 @@
 <?php
 
-namespace Access\Service;
+namespace Service;
 
-require_once __DIR__.'/../model/AccessModel.php';
+use Model\AccessModel;
 
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
-use Access\Model\AccessModel;
+
 
 class AccessService
 {

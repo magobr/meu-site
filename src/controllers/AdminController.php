@@ -1,13 +1,11 @@
 <?php
 
-namespace Admin\Controller;
+namespace Controller;
 
-require_once __DIR__.'/../model/PostsModel.php';
-
-use Access\Service\AccessService;
-use Blog\Controller\BlogController;
-use User\Controller\UserController;
-use Posts\Model\PostsModel;
+use Service\AccessService;
+use Controller\BlogController;
+use Controller\UserController;
+use Model\PostsModel;
 
 class AdminController extends PostsModel
 {

@@ -1,12 +1,11 @@
 <?php
 
-namespace Blog\Controller;
+namespace Controller;
 
-require_once __DIR__.'/../model/PostsModel.php';
+use Model\PostsModel;
 
-use Posts\Model\PostsModel;
-use Pecee\SimpleRouter\SimpleRouter;
 use Pecee\Http\Request;
+use Pecee\SimpleRouter\SimpleRouter;
 use Ramsey\Uuid\Uuid;
 
 class BlogController extends PostsModel

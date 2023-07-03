@@ -2,7 +2,11 @@
     "name": "thiago/meu-site",
     "autoload": {
         "psr-4": {
-            "Thiago\\MeuSite\\": "src/"
+            "Controller\\": "src/controllers",
+            "Middleware\\": "src/middleware",
+            "Model\\": "src/model",
+            "Service\\": "src/services",
+            "Config\\": "src/config"
         }
     },
     "authors": [

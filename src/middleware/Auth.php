@@ -1,13 +1,11 @@
 <?php
 
-namespace Auth\Middleware;
+namespace Middleware;
 
-require_once __DIR__.'/../services/MainService.php';
-
-use Pecee\SimpleRouter\SimpleRouter;
 use Pecee\Http\Middleware\IMiddleware;
 use Pecee\Http\Request;
-use MainService\Service\MainService;
+
+use Service\MainService;
 
 class Auth implements IMiddleware
 {   

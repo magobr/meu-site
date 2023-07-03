@@ -1,10 +1,9 @@
 <?php
 
-namespace Blog\Controller;
+namespace Controller;
 
-require_once __DIR__.'/../model/ImageModel.php';
+use Model\ImageModel;
 
-use Image\Model\ImageModel;
 use Pecee\SimpleRouter\SimpleRouter;
 use Ramsey\Uuid\Uuid;
 
