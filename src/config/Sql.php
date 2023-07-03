@@ -1,6 +1,6 @@
 <?php
 
-namespace Config\Conn;
+namespace Config;
 
 use \PDO;
 

@@ -1,12 +1,9 @@
 <?php
 
-namespace User\Controller;
+namespace Controller;
 
-require_once __DIR__.'/../model/UserModel.php';
-require_once __DIR__.'/../services/MainService.php';
-
-use User\Model\UserModel;
-use MainService\Service\MainService;
+use Model\UserModel;
+use Service\MainService;
 
 use Ramsey\Uuid\Uuid;
 use Pecee\SimpleRouter\SimpleRouter;

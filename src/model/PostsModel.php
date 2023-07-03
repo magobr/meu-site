@@ -1,10 +1,8 @@
 <?php
 
-namespace Posts\Model;
+namespace Model;
 
-require_once __DIR__.'/../config/Conn.php';
-
-use Config\Conn\Sql;
+use Config\Sql;
 
 class PostsModel extends Sql
 {

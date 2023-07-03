@@ -1,24 +1,16 @@
 <?php
 
-require_once __DIR__.'/controllers/ViewController.php';
-require_once __DIR__.'/controllers/BlogController.php';
-require_once __DIR__.'/controllers/ImageController.php';
-require_once __DIR__.'/controllers/UserController.php';
-require_once __DIR__.'/middleware/AuthMiddleware.php';
-require_once __DIR__.'/middleware/UserAccessAdminMiddleware.php';
-require_once __DIR__.'/middleware/UserAccessWriterMiddleware.php';
-require_once __DIR__.'/controllers/AdminController.php';
-
-use Admin\Controller\AdminController;
 use Pecee\SimpleRouter\SimpleRouter;
 use Pecee\Http\Request;
-use View\Controller\ViewController;
-use Blog\Controller\BlogController;
-use Blog\Controller\ImageController;
-use User\Controller\UserController;
-use Auth\Middleware\Auth;
-use UserAccessAdmin\Middleware\UserAccessAdmin;
-use UserAccessWriter\Middleware\UserAccessWriter;
+
+use Controller\AdminController;
+use Controller\ViewController;
+use Controller\BlogController;
+use Controller\ImageController;
+use Controller\UserController;
+use Middleware\Auth;
+use Middleware\UserAccessAdmin;
+use Middleware\UserAccessWriter;
 
 // Render Pages
 SimpleRouter::get('/', [ViewController::class, "renderPage"]);

@@ -1,6 +1,6 @@
 <?php
 
-namespace MainService\Service;
+namespace Service;
 
 class MainService
 {

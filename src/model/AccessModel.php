@@ -1,10 +1,8 @@
 <?php
 
-namespace Access\Model;
+namespace Model;
 
-require_once __DIR__.'/../config/Conn.php';
-
-use Config\Conn\Sql;
+use Config\Sql;
 
 class AccessModel extends Sql
 {
