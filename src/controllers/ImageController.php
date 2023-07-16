@@ -30,10 +30,10 @@ class ImageController
             ];
         }
 
-        if ($fileSize > 500000) {  //Arquivos com menos 300KB
+        if ($fileSize > 500000) {  //Arquivos com menos 500KB
             return [
                 "error" => true,
-                "message" => "Imagem maior que 300MB"
+                "message" => "Imagem maior que 500KB"
             ];
         }
 
@@ -54,12 +54,11 @@ class ImageController
 
     public function insertImage()
     {
-        $arrInput = json_decode(file_get_contents('php://input'));
         $imageUuid = Uuid::uuid4();
 
         $validImage = $this->validateImage($_FILES);
 
-        if (!$validImage) {
+        if (isset($validImage["error"]) && $validImage["error"]) {
             SimpleRouter::response()->httpCode(200)->json([
                 "error" => true,
                 "Message" => $validImage['message']
