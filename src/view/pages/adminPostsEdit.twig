@@ -9,27 +9,28 @@
         <script src="/public/js/alert.js"></script>
     </head>
 <body>
-    {% include "components/menuAdmin.twig" %}
+    <main>
+        {% include "components/menuAdmin.twig" %}
 
-    <section>
-        <h1>Editar Post</h1>
-        
-        <form id="form__post">
-            <div class="input__form">
-                <label for="titulo__form">Título</label>
-                <input class="input__form_field" type="text" id="titulo__form" value="{{data.titulo|raw}}">
-            </div>
-            <div class="input__form input__form_editor">
-                <label for="editor">Conteúdo</label>
-                <div id="toolbar"></div>
-                <div class="editor">
-                    {{data.conteudo|raw}}
+        <section>
+            <h1>Editar Post</h1>
+            
+            <form id="form__post">
+                <div class="input__form">
+                    <label for="titulo__form">Título</label>
+                    <input class="input__form_field" type="text" id="titulo__form" value="{{data.titulo|raw}}">
                 </div>
-            </div>
-            <input class="input__form_field input__form_btn btn-green" type="submit" value="Enviar">
-        </form> 
-    </section>
-
+                <div class="input__form input__form_editor">
+                    <label for="editor">Conteúdo</label>
+                    <div id="toolbar"></div>
+                    <div class="editor">
+                        {{data.conteudo|raw}}
+                    </div>
+                </div>
+                <input class="input__form_field input__form_btn btn-green" type="submit" value="Enviar">
+            </form> 
+        </section>
+    </main>
     {% include "components/quilljs.twig" %}
     <script>
         const postId = "{{postId}}";
