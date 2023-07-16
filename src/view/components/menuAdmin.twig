@@ -1,14 +1,61 @@
-    <header style="z-index: 1;">
+    <header>
         <div class="menu"> 
+            <div class="logo">
+                <h1>Admin</h1>
+            </div>
             <nav>
                 <ul>
-                    <li><a href="/admin/posts">Posts</a></li>
-                    <li><a href="/admin/posts/new">Novo Post</a></li>
+                    <li>
+                        <a href="/admin/posts">
+                            <div class="item-menu-block">
+                                <div class="icon__menu">
+                                    <span class="material-symbols-outlined">view_list</span>
+                                </div>
+                                <div class="item_menu">
+                                    Posts
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/admin/posts/new">
+                            <div class="item-menu-block">
+                                <div class="icon__menu">
+                                    <span class="material-symbols-outlined">post_add</span>
+                                </div>
+                                <div class="item_menu">
+                                    Novo Post
+                                </div>
+                            </div>
+                        </a>
+                    </li>
                     {% if user_acesso == acessos.admin %}
-                    <li><a href="#">Usuários</a></li>
+                    <li>
+                        <a href="#">
+                            <div class="item-menu-block">
+                                <div class="icon__menu">
+                                    <span class="material-symbols-outlined">group</span>
+                                </div>
+                                <div class="item_menu">
+                                    Usuários
+                                </div>
+                            </div>
+                        </a>
+                    </li>
                     {% endif %}
+                    <li>
+                        <a href="/user/logout">
+                            <div class="item-menu-block">
+                                <div class="icon__menu">
+                                    <span class="material-symbols-outlined">logout</span>
+                                </div>
+                                <div class="item_menu">
+                                    Logout
+                                </div>
+                            </div>
+                        </a>
+                    </li>
                 </ul>
-                <div id="logout" class="logout"><a href="/user/logout"><ion-icon name="exit"></ion-icon></a></div>
             </nav>
         </div>
     </header>

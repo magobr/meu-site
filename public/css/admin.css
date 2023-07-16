@@ -1,102 +1,135 @@
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 300,
+  'GRAD' 0,
+  'opsz' 48
+}
+
+main{
+    display: grid;
+    grid-template-columns: 300px auto;
+}
+
 header{
-    background: #ecf0f1;
     margin: 0;
-    position: fixed;
     color: #2c3e50;
 }
 
 .menu{
-    width: 100vw;
-    height: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    background: #ecf0f1;
+    width: 300px;
+    height: 100vh;
+    position: fixed;
+}
+
+.menu .logo{
+    margin: 25px;
+    text-align: center;
 }
 
 .menu nav{
     display: flex;
     flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
+    align-items: flex-start;
+    justify-content: center;
     height: 100%;
-    margin: 0 50px;
+    margin: 0 2rem;
 }
 
 .menu ul li{
     list-style: none;
-    display: inline;
-    padding: 5px;
-    font-weight: bold;
+    display: block;
 }
 
+.menu ul li .item-menu-block{
+    display: flex;
+    gap: 15px;
+    margin: 1.2rem 0;
+}
+
+.menu ul li .item-menu-block .item_menu{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.menu ul li .item-menu-block .icon__menu{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 3px;
+    width: 35px;
+    height: 35px;
+    box-shadow: 1px 1px 5px #aaaaaa;
+    border-radius: 4px;
+}
+
+/* List Post */
 section{
     padding-top: 60px;
-    margin: 0 50px;
+    margin: 0 30px;
 }
 
 section h1{
     margin: 30px 0;
 }
 
-table{
-    width: 100%;
-    text-align: justify;
-}
-
-table thead tr{
-    background-color: #bdc3c7;
-    color: #2c3e50;
-}
-
-table th{
-    font-size: 14px;
-    padding: 15px;
-}
-
-table td{
-    font-size: 12px;
-    padding: 15px;
-}
-
-tbody tr:nth-child(even) {
+section .post__item {
+    width: 400px;
     background-color: #ecf0f1;
-    color: #2c3e50;
-}
-
-table, th, td {
-    border: 1px solid #7f8c8d;
-    border-collapse: collapse;
-}
-
-table tr td ul{
-    list-style-type: none;
-}
-
-table tr .cel__icons{
+    color: #0a0d0f;
+    padding: 20px 30px;
+    border-radius: 4px;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    border: none;
+    justify-content: space-between;
+    font-size: 14px;
+    margin: 30px 0;
 }
 
-table tr td ul li{
-    list-style-type: none;
-    display: inline;
+section .post__item .post_info div{
+    margin: 7px 0;
 }
 
-table tr td ul li .icon{
+section .post__item .post_info .title{
+    font-size: 18px;
     font-weight: bold;
-    font-size: 17px;
 }
 
-.icon[name=create]{
+
+section .post__item .post_info span{
+    font-size: 13px;
+    font-weight: bold;
+}
+
+section .post__item .actions{
+    font-size: 1.1rem;
+}
+
+section .post__item .actions ul{
+    list-style: none;
+}
+
+section .post__item .actions ul li{
+    margin: 5px 0;
+}
+
+/* Fim List Post */
+
+.material-symbols-outlined[name="create"]{
     color: #2ecc71;
 }
-.icon[name=create]:hover{
+.material-symbols-outlined[name="create"]:hover{
     color: #27ae60;
 }
 
-.icon[name=trash]{
+.material-symbols-outlined[name="trash"]{
     color: #e74c3c;
 }
-.icon[name=trash]:hover{
+.material-symbols-outlined[name="trash"]:hover{
     color: #c0392b;
 }
 
