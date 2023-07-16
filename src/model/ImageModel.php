@@ -15,6 +15,8 @@ class ImageModel extends Sql
             "valores" => $valores
         ];
 
+        // die(var_dump($valores));
+
         $sql = new Sql();
         return $sql->store($data['table'], $data['valores'], $data['campos'], $data['indexCampos']);
     }

@@ -35,57 +35,78 @@
     </main>
     {% include "components/quilljs.twig" %}
     <script>
-        const userId = "{{id}}";
-        var titulo__form = document.getElementById("titulo__form");
 
         const form = document.getElementById("form__post")
 
         modalInit("Deseja Publicar esse Post");
-        alertSuccessInit("Publicação feita com sucesso!");
-        alertErrorInit("Publicação falhou!");
 
         async function sendImage() {
+            alertErrorInit("Erro ao inserir imagem!");
             var inputImage = document.getElementById("image");
             if (inputImage.files[0]) {
 
                 var dataImage = new FormData()
                 dataImage.append('image', inputImage.files[0]);
 
-                console.log(dataImage);
+                try {
+                    var resImage = await fetch('/image/new', {
+                        method: 'POST',
+                        body: dataImage
+                    }); 
 
-                var resImage = await fetch('/image/new', {
-                    method: 'POST',
-                    body: dataImage
-                });
+                    return await resImage.json();
 
-              return await resImage.json();
+                } catch (error) {
+                    return await error
+                }              
             }
 
             return null
         }
 
+        async function sendForm(img) {
+            alertSuccessInit("Publicação feita com sucesso!");
+            alertErrorInit("Publicação falhou!");
+
+            var conteudo__from = editor.root.innerHTML;
+            const userId = "{{id}}";
+            var titulo__form = document.getElementById("titulo__form");
+
+            try {
+                var result = await consumeApi("/post/new", {
+                        titulo: titulo__form.value,
+                        conteudo: conteudo__from,
+                        user_post: userId,
+                        image: img
+                    },
+                    "POST"
+                );
+                return await result.json();
+            } catch (error) {
+                return await error
+            }
+
+            
+        }
+
         form.addEventListener('submit', async (e)=>{
             e.preventDefault();
-            let responseModal = await modalFunction();
+            const responseModal = await modalFunction();
 
             if (!responseModal) {
-                console.log(responseModal);
                 return
             }
 
             var resImage = await sendImage();
-            console.log(resImage);
-            var conteudo__from = editor.root.innerHTML;
-            var result = await consumeApi("/post/new", {
-                    titulo: titulo__form.value,
-                    conteudo: conteudo__from,
-                    user_post: userId,
-                    image: resImage != null ? resImage.id : "NULL"
-                },
-                "POST"
-            );
+
+            if (resImage.error) {
+                alertErrorFunction();
+                return
+            }
             
-            if(result.error){
+            var formData = await sendForm(resImage.id)
+            
+            if(formData.error){
                 alertErrorFunction();
                 return
             }
