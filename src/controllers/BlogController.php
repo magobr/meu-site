@@ -67,7 +67,7 @@ class BlogController extends PostsModel
       return;
    }
 
-   static public function getPostByUser($id)
+   static public function getPostsUser($id)
    {
       $result = PostsModel::findPostsByUser($id);
 
@@ -78,17 +78,17 @@ class BlogController extends PostsModel
       }
 
       if (sizeof($result) === 0) {
-         SimpleRouter::response()->httpCode(400)->json(([
+         return[
             "error" => false,
             "data" => $result,
             "message" => "Não foi encontrado dados"
-         ]));
+         ];
       }
 
-      SimpleRouter::response()->httpCode(200)->json(([
+      return[
          "error" => false,
          "data" => $result
-      ]));
+      ];
    }
 
    static public function insertPost()
@@ -130,9 +130,18 @@ class BlogController extends PostsModel
 
    static public function updatePosts($id)
    {
-      $arrInput = json_decode(file_get_contents('php://input'));
 
+      
+      $arrInput = json_decode(file_get_contents('php://input'));
+      
       $valores = get_object_vars($arrInput);
+
+      if (empty($valores)) {
+         SimpleRouter::response()->httpCode(400)->json([
+            "error" => true,
+            "Message" => "Requisição sem corpo"
+        ]);
+      }
 
       if ($valores['titulo'] === "") {
          SimpleRouter::response()->httpCode(200)->json([

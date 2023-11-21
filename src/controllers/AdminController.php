@@ -21,7 +21,7 @@ class AdminController extends PostsModel
     {
         $user = $this->getUser();
         
-        $result = BlogController::getPostByUser($user->{"id"});
+        $result = BlogController::getPostsUser($user->{"id"});
 
         $loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/../view');
         $twig = new \Twig\Environment($loader);

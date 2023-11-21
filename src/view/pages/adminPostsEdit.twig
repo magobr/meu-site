@@ -51,7 +51,7 @@
             }
 
             var conteudo__from = editor.root.innerHTML;
-            var result = await consumeApi(`/posts/${postId}`, {
+            var result = await consumeApi(`/post/${postId}`, {
                     titulo: titulo__form.value,
                     conteudo: conteudo__from
                 },
