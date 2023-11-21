@@ -89,9 +89,13 @@ class AdminController extends PostsModel
         $loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/../view');
         $twig = new \Twig\Environment($loader);
 
+        $access = AccessService::getAccess();
+
         $template = $twig->load('pages/adminPostsNew.twig');
         echo $template->render([
-            "id" => $user->{'id'}
+            "id" => $user->{'id'},
+            "user_acesso" => $user->{"acesso"},
+            "acessos" => $access
         ]);
         return;
     }
