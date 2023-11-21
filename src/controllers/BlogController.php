@@ -78,17 +78,17 @@ class BlogController extends PostsModel
       }
 
       if (sizeof($result) === 0) {
-         return [
+         SimpleRouter::response()->httpCode(400)->json(([
             "error" => false,
             "data" => $result,
             "message" => "Não foi encontrado dados"
-         ];
+         ]));
       }
 
-      return [
+      SimpleRouter::response()->httpCode(200)->json(([
          "error" => false,
          "data" => $result
-      ];
+      ]));
    }
 
    static public function insertPost()
