@@ -93,23 +93,49 @@ class BlogController extends PostsModel
 
    static public function insertPost()
    {
+
       $arrInput = json_decode(file_get_contents('php://input'));
+      if (empty($arrInput)) {
+         SimpleRouter::response()->httpCode(400)->json([
+            "error" => true,
+            "Message" => "Requisição sem corpo"
+        ]);
+      }
+
+      if (empty($arrInput->{"image"})) {
+         $arrInput->{"image"} = NULL;
+      }
+
       $userUuid = Uuid::uuid4();
       $arrInput->{"id"}=$userUuid->toString();
 
       $valores = get_object_vars($arrInput);
-
-      if ($valores['titulo'] === "") {
+      
+      if (empty($valores)) {
+         SimpleRouter::response()->httpCode(400)->json([
+            "error" => true,
+            "Message" => "Requisição sem corpo"
+        ]);
+      }
+      
+      if (empty($valores['titulo'])) {
          SimpleRouter::response()->httpCode(200)->json([
             "error" => true,
             "Message" => "Preencha o campo título"
         ]);
       }
 
-      if ($valores['conteudo'] === "") {
+      if (empty($valores['conteudo'])) {
          SimpleRouter::response()->httpCode(200)->json([
             "error" => true,
             "Message" => "Preencha o campo conteudo"
+        ]);
+      }
+
+      if (empty($valores['user_post'])) {
+         SimpleRouter::response()->httpCode(200)->json([
+            "error" => true,
+            "Message" => "Faça autenticação para continuar"
         ]);
       }
 
