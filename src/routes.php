@@ -24,13 +24,18 @@ SimpleRouter::put('/posts/{id}', [BlogController::class, "updatePosts", $params=
 SimpleRouter::post('/post/new', [BlogController::class, "insertPost"]);
 SimpleRouter::delete('/post/delete/{id}', [BlogController::class, "purgePost", $params='']);
 
-// Users Api
-SimpleRouter::post('/user/new', [UserController::class, "insertUser"]);
-SimpleRouter::put('/user/update/{id}', [UserController::class, "update", $params='']);
-SimpleRouter::put('/user/update/pass/{id}', [UserController::class, "updatePassword", $params='']);
-SimpleRouter::delete('/user/delete/{id}', [UserController::class, "delete", $params='']);
+// Login
 SimpleRouter::post('/user/login', [UserController::class, "login"]);
 SimpleRouter::get('/user/logout', [UserController::class, "logout"]);
+
+// Users Api
+SimpleRouter::group(["middleware" => Auth::class, "prefix" => "/user"], function()
+{
+    SimpleRouter::post('/new', [UserController::class, "insertUser"]);
+    SimpleRouter::put('/update/{id}', [UserController::class, "update", $params='']);
+    SimpleRouter::put('/update/pass/{id}', [UserController::class, "updatePassword", $params='']);
+    SimpleRouter::delete('/delete/{id}', [UserController::class, "delete", $params='']);
+});
 
 // Image Api
 SimpleRouter::post('/image/new', [ImageController::class, "insertImage"]);

@@ -113,10 +113,14 @@ class BlogController extends PostsModel
         ]);
       }
 
+      if (!isset($valores['image'])) {
+         $valores['image'] = "";
+      }
+
       $resp = PostsModel::storePost($valores);
 
       if (isset($resp["error"]) && $resp['error']) {
-         SimpleRouter::response()->httpCode(200)->json([
+         SimpleRouter::response()->httpCode(500)->json([
             $resp
         ]);
       }
