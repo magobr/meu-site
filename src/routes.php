@@ -8,6 +8,7 @@ use Controller\ViewController;
 use Controller\BlogController;
 use Controller\ImageController;
 use Controller\UserController;
+use Controller\ProjetosController;
 use Middleware\Auth;
 use Middleware\UserAccessAdmin;
 use Middleware\UserAccessWriter;
@@ -55,6 +56,16 @@ SimpleRouter::group(["middleware" => Auth::class, "prefix" => "/admin"], functio
 
     SimpleRouter::get('/posts', [AdminController::class, "renderUserPosts"]);
     SimpleRouter::get('/', [ViewController::class, "renderLogin"]);
+});
+
+// Projetos
+SimpleRouter::group(["prefix" => "/projetos"], function()
+{
+    SimpleRouter::group(["prefix" => "/api"], function ()
+    {
+        SimpleRouter::get('/', [ProjetosController::class, "getProjetos"]);    
+    });
+    SimpleRouter::get('/', [ProjetosController::class, "renderUserProjetos"]);    
 });
 
 // error pages

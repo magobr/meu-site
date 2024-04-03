@@ -215,6 +215,13 @@ footer .footer-card__contents .icon:hover{
     color: #3c40c6;
 }
 
+.container {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+}
+
 @media screen and (max-width: 420px) {
 
     header .header__menu nav{

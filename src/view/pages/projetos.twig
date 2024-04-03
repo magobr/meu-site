@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {% include "components/head.twig" %}
+        {% include "utils/blogs.css.twig" %}
+        <link rel="stylesheet" href="/public/css/projetos.css">
+    </head>
+<body>
+    <header>
+        {% include "components/menu.twig" %}
+    </header>
+
+    <div class="container">
+        <div class="lista_projetos">
+        {% for key, content in data %}
+            {% if(content.fork == false) %}
+            <div class="item_projeto vertical_center">
+                <a href="{{content.html_url}}" target="_blank">
+                    <div class="projeto_name">
+                        <div class="name">{{content.name}}</div>
+                        <div class="icon"><ion-icon name="bookmark-outline"></ion-icon></div>
+                    </div>
+                    <div class="projeto_descricao">
+                        {{content.description}}
+                    </div>
+                    <div class="projeto_language">
+                        {% if(content.language == 'PHP') %}
+                            <img alt="php" src="https://img.shields.io/badge/PHP-483D8B?style=for-the-badge&logo=php&logoColor=white" />
+                        {% elseif(content.language == 'JavaScript') %}
+                            <img alt="js" src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" />
+                        {% elseif(content.language == 'TypeScript') %}
+                            <img alt="ts" src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white" />
+                        {% elseif(content.language == 'HTML') %}
+                            <img alt="html5" src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" />
+                        {% elseif(content.language == 'CSS') %}
+                            <img alt="css" src="https://img.shields.io/badge/CSS3-339BD5?style=for-the-badge&logo=css3&logoColor=white" />
+                        {% elseif(content.language == 'Dockerfile' or content.language == 'Docker') %}
+                            <img alt="css" src="https://img.shields.io/badge/docker-1d63ed?style=for-the-badge&logo=docker&logoColor=white" />
+                        {% else %}
+                            {{content.language}}
+                        {% endif %}
+                    </div>
+                </a>
+            </div>
+            {% endif %}
+        {% endfor %}
+        </div>
+    </div>
+
+    {% include "components/footer.twig" %}
+    {% include "scripts/icons.twig" %}
+</body>
