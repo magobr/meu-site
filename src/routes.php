@@ -10,8 +10,7 @@ use Controller\ImageController;
 use Controller\UserController;
 use Controller\ProjetosController;
 use Middleware\Auth;
-use Middleware\UserAccessAdmin;
-use Middleware\UserAccessWriter;
+use Middleware\Access;
 
 // Render Pages
 SimpleRouter::get('/', [ViewController::class, "renderPage"]);
@@ -21,9 +20,13 @@ SimpleRouter::get('/blog/{id}', [BlogController::class, "getPost", $params='']);
 // Blogs Api
 SimpleRouter::get('/blog/posts/{id}', [BlogController::class, "getPost", $params='']);
 SimpleRouter::get('/blog/posts/user/{id}', [BlogController::class, "getPostByUser", $params='']);
-SimpleRouter::put('/posts/{id}', [BlogController::class, "updatePosts", $params='']);
-SimpleRouter::post('/post/new', [BlogController::class, "insertPost"]);
-SimpleRouter::delete('/post/delete/{id}', [BlogController::class, "purgePost", $params='']);
+
+SimpleRouter::group(["middleware" => Access::class], function ()
+{
+    SimpleRouter::post('/post/new', [BlogController::class, "insertPost"]);
+    SimpleRouter::put('/posts/edit/{id}', [BlogController::class, "updatePosts", $params='']);
+    SimpleRouter::delete('/post/delete/{id}', [BlogController::class, "purgePost", $params='']);
+});
 
 // Login
 SimpleRouter::post('/user/login', [UserController::class, "login"]);
@@ -45,12 +48,10 @@ SimpleRouter::post('/image/new', [ImageController::class, "insertImage"]);
 SimpleRouter::group(["middleware" => Auth::class, "prefix" => "/admin"], function ()
 {
 
-    SimpleRouter::group(["middleware" => UserAccessWriter::class], function (){
+    SimpleRouter::group(["middleware" => Access::class], function ()
+    {
         SimpleRouter::get('/posts/new', [AdminController::class, "renderNewPost"]);
         SimpleRouter::get('/posts/edit/{id}', [AdminController::class, "renderEditPosts", $params='']);
-    });
-
-    SimpleRouter::group(["middleware" => UserAccessAdmin::class], function (){
         SimpleRouter::get('/posts/delete/{id}', [AdminController::class, "renderDelPosts", $params='']);
     });
 

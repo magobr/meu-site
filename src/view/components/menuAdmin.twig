@@ -18,6 +18,7 @@
                         </a>
                     </li>
                     <li>
+                        {% if "usuarios" in user_acessos %}
                         <a href="/admin/posts/new">
                             <div class="item-menu-block">
                                 <div class="icon__menu">
@@ -28,8 +29,9 @@
                                 </div>
                             </div>
                         </a>
+                        {% endif %}
                     </li>
-                    {% if user_acesso == acessos.admin %}
+                    {% if "usuarios" in user_acessos %}
                     <li>
                         <a href="#">
                             <div class="item-menu-block">

@@ -29,32 +29,17 @@ class AccessService
         return $result;
     }
 
-    static function levelAdmin()
+    static function levelAccess($accessLevel)
     {
-        $getAccess = AccessModel::levelAdmin();
+        $getAccess = AccessModel::levelAccess($accessLevel);
         $result = "";
 
         if (count($getAccess) != 0) {
             foreach($getAccess as $access){ 
-                $result = $access['id'];
+                $result = $access['pagesAccess'];
             }
-            
-            return $result;
+            $result = explode(",", $result);
         }
+        return $result;
     }
-
-    static function levelWriter()
-    {
-        $getAccess = AccessModel::levelWriter();
-        $result = "";
-
-        if (count($getAccess) != 0) {
-            foreach($getAccess as $access){ 
-                $result = $access['id'];
-            }
-            
-            return $result;
-        }
-    }
-
 }

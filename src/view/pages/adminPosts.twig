@@ -28,6 +28,7 @@
                         </div>
                         <div class="actions">
                             <ul>
+                                {% if "editar_post" in user_acessos %}
                                 <li>
                                     <a href="/admin/posts/edit/{{content.id}}">
                                         <span class="material-symbols-outlined" name="create">
@@ -35,7 +36,8 @@
                                         </span>
                                     </a>
                                 </li>
-                                {% if user_acesso == acessos.admin %}
+                                {% endif %}
+                                {% if "apagar_post" in user_acessos %}
                                 <li>
                                     <a href="/admin/posts/delete/{{content.id}}">
                                         <span class="material-symbols-outlined" name="trash">

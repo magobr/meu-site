@@ -26,7 +26,7 @@ class AdminController extends PostsModel
         $loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/../view');
         $twig = new \Twig\Environment($loader);
 
-        $access = AccessService::getAccess();
+        $access = AccessService::levelAccess($user->{"acesso"});
 
         $template = $twig->load('pages/adminPosts.twig');
         echo $template->render([
@@ -34,8 +34,7 @@ class AdminController extends PostsModel
             "user_id" => $user->{"id"},
             "user_nome" => $user->{"nome"},
             "user_email" => $user->{"email"},
-            "user_acesso" => $user->{"acesso"},
-            "acessos" => $access
+            "user_acessos" => $access
         ]);
         return;
     }
@@ -49,14 +48,13 @@ class AdminController extends PostsModel
         $loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/../view');
         $twig = new \Twig\Environment($loader);
 
-        $access = AccessService::getAccess();
+        $access = AccessService::levelAccess($user->{"acesso"});
 
         $template = $twig->load('pages/adminPostsEdit.twig');
         echo $template->render([
             "data" => $result[0],
             "postId" => $id,
-            "user_acesso" => $user->{"acesso"},
-            "acessos" => $access
+            "user_acessos" => $access
         ]);
         return;
     }
@@ -70,14 +68,13 @@ class AdminController extends PostsModel
         $loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/../view');
         $twig = new \Twig\Environment($loader);
 
-        $access = AccessService::getAccess();
+        $access = AccessService::levelAccess($user->{"acesso"});
 
         $template = $twig->load('pages/adminPostsDel.twig');
         echo $template->render([
             "data" => $result[0],
             "postId" => $id,
-            "user_acesso" => $user->{"acesso"},
-            "acessos" => $access
+            "user_acessos" => $access
         ]);
         return;
     }
@@ -89,13 +86,12 @@ class AdminController extends PostsModel
         $loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/../view');
         $twig = new \Twig\Environment($loader);
 
-        $access = AccessService::getAccess();
+        $access = AccessService::levelAccess($user->{"acesso"});
 
         $template = $twig->load('pages/adminPostsNew.twig');
         echo $template->render([
             "id" => $user->{'id'},
-            "user_acesso" => $user->{"acesso"},
-            "acessos" => $access
+            "user_acessos" => $access
         ]);
         return;
     }
