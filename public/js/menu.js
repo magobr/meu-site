@@ -1,4 +1,14 @@
 const header__menu = document.querySelector('.header__menu');
+const menuIcon = document.querySelector('#menu-icon');
+const closeMenuIcon = document.querySelector('#close-menu-icon');
+
+menuIcon.addEventListener('click', ()=>{
+    header__menu.classList.add('open');
+})
+
+closeMenuIcon.addEventListener('click', ()=>{
+    header__menu.classList.remove('open');
+})
 
 document.addEventListener('scroll', (e)=>{
     if(window.scrollY > 10){
