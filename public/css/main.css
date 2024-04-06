@@ -293,8 +293,8 @@ footer .footer-card__contents .icon:hover{
         text-align: center;
     }
 
-    header nav .header__menu .header__menu-logo{
-        margin-left: 30px;
+    header .header__menu nav .header__menu-logo{
+        margin-right: 30px;
         display: block;
     }
 
