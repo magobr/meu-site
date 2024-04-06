@@ -285,7 +285,6 @@ footer .footer-card__contents .icon:hover{
     header .header__menu nav a{
         color: #dfe6e9;
         justify-content: left;
-        margin-left: 50px;
     }
 
     header .header__menu.open nav{
