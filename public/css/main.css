@@ -287,19 +287,25 @@ footer .footer-card__contents .icon:hover{
         justify-content: left;
     }
 
+    header .header__menu.background_menu nav a{
+        color: #1e272e;
+        justify-content: left;
+    }
+
     header .header__menu.open nav{
         margin-left: 0;
         justify-content: center;
         text-align: center;
+        background-color: #dfe6e9;
+    }
+
+    header .header__menu.open nav a{
+        color: #1e272e;
     }
 
     header .header__menu nav .header__menu-logo{
         margin-right: 30px;
         display: block;
-    }
-
-    header nav .header__menu .header__menu-logo a{
-        color: #dfe6e9;
     }
 
     header .header__menu.open .header__menu-logo{
