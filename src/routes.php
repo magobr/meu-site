@@ -21,11 +21,11 @@ SimpleRouter::get('/blog/{id}', [BlogController::class, "getPost", $params='']);
 SimpleRouter::get('/blog/posts/{id}', [BlogController::class, "getPost", $params='']);
 SimpleRouter::get('/blog/posts/user/{id}', [BlogController::class, "getPostByUser", $params='']);
 
-SimpleRouter::group(["middleware" => Access::class], function ()
+SimpleRouter::group(["prefix" => "/posts", "middleware" => Access::class], function ()
 {
-    SimpleRouter::post('/post/new', [BlogController::class, "insertPost"]);
-    SimpleRouter::put('/posts/edit/{id}', [BlogController::class, "updatePosts", $params='']);
-    SimpleRouter::delete('/post/delete/{id}', [BlogController::class, "purgePost", $params='']);
+    SimpleRouter::post('/new', [BlogController::class, "insertPost"]);
+    SimpleRouter::put('/edit/{id}', [BlogController::class, "updatePosts", $params='']);
+    SimpleRouter::delete('/delete/{id}', [BlogController::class, "purgePost", $params='']);
 });
 
 // Login

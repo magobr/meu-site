@@ -45,7 +45,7 @@
                 return
             }
 
-            var result = await consumeApi(`/post/delete/${postId}`, null, "DELETE");
+            var result = await consumeApi(`/posts/delete/${postId}`, null, "DELETE");
 
             if(!result.error){
                 window.location.href = '/admin/posts';

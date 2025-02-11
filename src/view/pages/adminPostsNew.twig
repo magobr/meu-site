@@ -73,7 +73,7 @@
             var titulo__form = document.getElementById("titulo__form");
 
             try {
-                var result = await consumeApi("/post/new", {
+                var result = await consumeApi("/posts/new", {
                         titulo: titulo__form.value,
                         conteudo: conteudo__from,
                         user_post: userId,
