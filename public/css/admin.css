@@ -82,6 +82,12 @@ section h1{
     margin: 30px 0;
 }
 
+section .posts__list{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+}
+
 section .post__item {
     width: 400px;
     background-color: #ecf0f1;
@@ -91,7 +97,7 @@ section .post__item {
     display: flex;
     justify-content: space-between;
     font-size: 14px;
-    margin: 30px 0;
+    margin: 30px;
 }
 
 section .post__item .post_info div{
