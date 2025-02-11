@@ -45,6 +45,10 @@ header{
     display: block;
 }
 
+.menu ul li a{
+    color: #2c3e50;
+}
+
 .menu ul li .item-menu-block{
     display: flex;
     gap: 15px;
