@@ -47,7 +47,6 @@ SimpleRouter::post('/image/new', [ImageController::class, "insertImage"]);
 // AdminPages
 SimpleRouter::group(["middleware" => Auth::class, "prefix" => "/admin"], function ()
 {
-
     SimpleRouter::group(["middleware" => Access::class], function ()
     {
         SimpleRouter::get('/posts/new', [AdminController::class, "renderNewPost"]);

@@ -6,7 +6,8 @@
             "Middleware\\": "src/middleware",
             "Model\\": "src/model",
             "Service\\": "src/services",
-            "Config\\": "src/config"
+            "Config\\": "src/config",
+            "Utils\\": "src/utils"
         }
     },
     "authors": [
