@@ -211,8 +211,8 @@ class UserController extends UserModel
         list($realHost,)=explode(':',$_SERVER['HTTP_HOST']);
         unset($_COOKIE["USER_TOKEN"]);
         unset($_COOKIE["USER_LOGIN"]);
-        setcookie("USER_TOKEN", null, time() - 3600, '/', $realHost);
-        setcookie("USER_LOGIN", null, time() - 3600, '/', $realHost);
+        setcookie("USER_TOKEN", "", time() - 3600, '/', $realHost);
+        setcookie("USER_LOGIN", "", time() - 3600, '/', $realHost);
         MainService::Redirect('/admin');
     }
 

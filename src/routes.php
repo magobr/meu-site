@@ -14,12 +14,20 @@ use Middleware\Access;
 
 // Render Pages
 SimpleRouter::get('/', [ViewController::class, "renderPage"]);
-SimpleRouter::get('/blog', [BlogController::class, "getPosts"]);
-SimpleRouter::get('/blog/{id}', [BlogController::class, "getPost", $params='']);
+
+// Blogs Pages
+SimpleRouter::group(["prefix" => "/blog"], function ()
+{
+    SimpleRouter::get('/', [BlogController::class, "renderPosts"]);
+    SimpleRouter::get('/{id}', [BlogController::class, "renderPost", $params='']);
+});
 
 // Blogs Api
-SimpleRouter::get('/blog/posts/{id}', [BlogController::class, "getPost", $params='']);
-SimpleRouter::get('/blog/posts/user/{id}', [BlogController::class, "getPostByUser", $params='']);
+SimpleRouter::group(["prefix" => "/api"], function ()
+{
+    SimpleRouter::get('/posts/{id}', [BlogController::class, "getPost", $params='']);
+    SimpleRouter::get('/posts/user/{id}', [BlogController::class, "getPostByUser", $params='']);   
+});
 
 SimpleRouter::group(["prefix" => "/posts", "middleware" => Access::class], function ()
 {
@@ -29,8 +37,11 @@ SimpleRouter::group(["prefix" => "/posts", "middleware" => Access::class], funct
 });
 
 // Login
-SimpleRouter::post('/user/login', [UserController::class, "login"]);
-SimpleRouter::get('/user/logout', [UserController::class, "logout"]);
+SimpleRouter::group(["prefix" => "/user"], function ()
+{
+    SimpleRouter::post('/login', [UserController::class, "login"]);
+    SimpleRouter::get('/logout', [UserController::class, "logout"]);
+});
 
 // Users Api
 SimpleRouter::group(["middleware" => Auth::class, "prefix" => "/user"], function()

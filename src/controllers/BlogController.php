@@ -10,7 +10,7 @@ use Ramsey\Uuid\Uuid;
 
 class BlogController extends PostsModel
 {
-   static public function getPosts()
+   static public function renderPosts()
    {
       $result = PostsModel::findPosts();
 
@@ -32,7 +32,7 @@ class BlogController extends PostsModel
    }
     
 
-   static public function getPost($id)
+   static public function renderPost($id)
    {
       $request = new Request;
 
@@ -51,10 +51,6 @@ class BlogController extends PostsModel
          SimpleRouter::response()->redirect('/not-found');
       }
 
-      
-      if(in_array("admin", $url)){
-         return $result;
-      }
 
       $loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/../view');
       $twig = new \Twig\Environment($loader);
@@ -67,24 +63,102 @@ class BlogController extends PostsModel
       return;
    }
 
+   static public function getPost($id)
+   {
+      $result = PostsModel::findPostsById($id);
+
+      if (isset($result['error']) && $result['error']) {
+         SimpleRouter::response()->httpCode(500)->json([
+            "error" => true,
+            "data" => $result,
+            "message" => "Erro ao buscar dados"
+        ]);
+      }
+
+      if (isset($result) && sizeof($result) === 0) {
+         SimpleRouter::response()->httpCode(404)->json([
+            "error" => false,
+            "data" => $result,
+            "message" => "Não foi encontrado dados"
+        ]);
+      }
+      SimpleRouter::response()->httpCode(404)->json([
+          "error" => false,
+         "data" => $result
+      ]);
+   }
+
+   static public function viewPost($id)
+   {
+      $result = PostsModel::findPostsById($id);
+
+      if (isset($result['error']) && $result['error']) {
+         return [
+            "error" => true,
+            "data" => $result,
+            "message" => "Erro ao buscar dados"
+        ];
+      }
+
+      if (isset($result) && sizeof($result) === 0) {
+         return [
+            "error" => false,
+            "data" => $result,
+            "message" => "Não foi encontrado dados"
+        ];
+      }
+      return [
+         "error" => false,
+         "data" => $result[0]
+      ];
+   }
+
    static public function getPostByUser($id)
    {
       $result = PostsModel::findPostsByUser($id);
 
       if (isset($result['error']) && $result['error']) {
+         SimpleRouter::response()->httpCode(500)->json([
+            "error" => true,
+            "data" => $result,
+            "message" => "Erro ao buscar dados"
+        ]);
+      }
+
+      if (sizeof($result) === 0) {
+         SimpleRouter::response()->httpCode(404)->json([
+            "error" => true,
+            "data" => $result,
+            "message" => "Não foi encontrado dados"
+        ]);
+      }
+
+      SimpleRouter::response()->httpCode(200)->json([
+         "error" => false,
+         "data" => $result
+     ]);
+   }
+
+   static public function viewPostByUser($id)
+   {
+      $result = PostsModel::findPostsByUser($id);
+
+      if (isset($result['error']) && $result['error']) {
          return [
-            $result
-         ];
+            "error" => true,
+            "data" => $result,
+            "message" => "Erro ao buscar dados"
+        ];
       }
 
       if (sizeof($result) === 0) {
          return [
-            "error" => false,
+            "error" => true,
             "data" => $result,
             "message" => "Não foi encontrado dados"
-         ];
+        ];
       }
-
+      
       return [
          "error" => false,
          "data" => $result

@@ -20,9 +20,9 @@ class AdminController extends PostsModel
     function renderUserPosts()
     {
         $user = $this->getUser();
-        
-        $result = BlogController::getPostByUser($user->{"id"});
 
+        $result = BlogController::viewPostByUser($user->{"id"});
+               
         $loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/../view');
         $twig = new \Twig\Environment($loader);
 
@@ -43,7 +43,7 @@ class AdminController extends PostsModel
     {
         $user = $this->getUser();
         
-        $result = BlogController::getPost($id);
+        $result = BlogController::viewPost($id);
 
         $loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/../view');
         $twig = new \Twig\Environment($loader);
@@ -52,7 +52,7 @@ class AdminController extends PostsModel
 
         $template = $twig->load('pages/adminPostsEdit.twig');
         echo $template->render([
-            "data" => $result[0],
+            "data" => $result['data'],
             "postId" => $id,
             "user_acessos" => $access
         ]);
@@ -63,7 +63,7 @@ class AdminController extends PostsModel
     {
         $user = $this->getUser();
 
-        $result = BlogController::getPost($id);
+        $result = BlogController::viewPost($id);
 
         $loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/../view');
         $twig = new \Twig\Environment($loader);
@@ -72,7 +72,7 @@ class AdminController extends PostsModel
 
         $template = $twig->load('pages/adminPostsDel.twig');
         echo $template->render([
-            "data" => $result[0],
+            "data" => $result['data'],
             "postId" => $id,
             "user_acessos" => $access
         ]);
