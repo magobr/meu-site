@@ -82,7 +82,7 @@ class BlogController extends PostsModel
             "message" => "Não foi encontrado dados"
         ]);
       }
-      SimpleRouter::response()->httpCode(404)->json([
+      SimpleRouter::response()->httpCode(200)->json([
           "error" => false,
          "data" => $result
       ]);

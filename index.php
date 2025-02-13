@@ -5,6 +5,6 @@ use Pecee\SimpleRouter\SimpleRouter;
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
-require_once './src/routes.php';
+require_once './src/router.php';
 
 SimpleRouter::start();
