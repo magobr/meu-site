@@ -3,9 +3,9 @@
 namespace Controller;
 
 use Service\AccessService;
-use Controller\BlogController;
 use Controller\UserController;
 use Model\PostsModel;
+use Service\AdminService;
 
 class AdminController extends PostsModel
 {
@@ -21,7 +21,7 @@ class AdminController extends PostsModel
     {
         $user = $this->getUser();
 
-        $result = BlogController::viewPostByUser($user->{"id"});
+        $result = AdminService::viewPostByUser($user->{"id"});
                
         $loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/../view');
         $twig = new \Twig\Environment($loader);
@@ -43,7 +43,7 @@ class AdminController extends PostsModel
     {
         $user = $this->getUser();
         
-        $result = BlogController::viewPost($id);
+        $result = AdminService::viewPost($id);
 
         $loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/../view');
         $twig = new \Twig\Environment($loader);
@@ -63,7 +63,7 @@ class AdminController extends PostsModel
     {
         $user = $this->getUser();
 
-        $result = BlogController::viewPost($id);
+        $result = AdminService::viewPost($id);
 
         $loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/../view');
         $twig = new \Twig\Environment($loader);
