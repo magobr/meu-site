@@ -24,7 +24,6 @@ SimpleRouter::get('/forbidden', [ViewController::class, "forbiddenPage"]);
 
 
 SimpleRouter::error(function(Request $request, \Exception $exception) {
-
     switch($exception->getCode()) {
         // Page not found
         case 404:
@@ -33,5 +32,4 @@ SimpleRouter::error(function(Request $request, \Exception $exception) {
         case 403:
             SimpleRouter::response()->redirect('/forbidden');
     }
-    
 });
