@@ -26,6 +26,7 @@ class MainService
             "novo_post" => "posts/new",
             "editar_post" => "posts/edit",
             "apagar_post" => "posts/delete",
+            "image" => "image",
         ];
     }
 

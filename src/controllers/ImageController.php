@@ -82,4 +82,59 @@ class ImageController
             "id" => $imageUuid
         ]);
     }
+
+    public function getImage()
+    {
+        $images = ImageModel::getImages();
+
+        if (isset($images['error']) && $images['error']) {
+            SimpleRouter::response()->httpCode(400)->json([
+                $images
+            ]);
+        }
+
+        SimpleRouter::response()->httpCode(200)->json([
+            "error" => false,
+            "images" => $images
+        ]);
+    }
+
+    public function getImageId($id)
+    {
+        $image = ImageModel::getImage($id);
+
+        if (isset($image['error']) && $image['error']) {
+            SimpleRouter::response()->httpCode(400)->json([
+                $image
+            ]);
+        }
+
+        SimpleRouter::response()->httpCode(200)->json([
+            "error" => false,
+            "image" => $image
+        ]);
+    }
+
+    public function deleteImage($id)
+    {
+        $resp = ImageModel::deleteImage($id);
+
+        if (isset($resp['error']) && $resp['error']) {
+            SimpleRouter::response()->httpCode(400)->json([
+                $resp
+            ]);
+        }
+
+        if (isset($resp) && $resp == 0) {
+            SimpleRouter::response()->httpCode(400)->json([
+                "error" => true,
+                "Message" => "Imagem não encontrada"
+            ]);
+        }
+
+        SimpleRouter::response()->httpCode(200)->json([
+            "error" => false,
+            "Message" => "Imagem deletada com sucesso"
+        ]);
+    }
 }

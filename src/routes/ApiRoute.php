@@ -33,8 +33,14 @@ class ApiRoute
             SimpleRouter::put('/update/{id}', [UserController::class, "update", $params='']);
             SimpleRouter::put('/update/pass/{id}', [UserController::class, "updatePassword", $params='']);
             SimpleRouter::delete('/delete/{id}', [UserController::class, "delete", $params='']);
+        });
 
-            SimpleRouter::post('/image/new', [ImageController::class, "insertImage"]);
+        SimpleRouter::group(["middleware" => Auth::class, "middleware" => Access::class, "prefix" => "/image"], function()
+        {
+            SimpleRouter::get('/', [ImageController::class, "getImage"]);
+            SimpleRouter::post('/new', [ImageController::class, "insertImage"]);
+            SimpleRouter::get('/{id}', [ImageController::class, "getImageId", $params='']);
+            SimpleRouter::delete('/{id}', [ImageController::class, "deleteImage", $params='']);
         });
     }
 }
