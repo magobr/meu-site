@@ -95,4 +95,23 @@ class AdminController extends PostsModel
         ]);
         return;
     }
+
+    function renderImage()
+    {
+        $user = $this->getUser();
+
+        $result = AdminService::getImage();
+
+        $loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/../view');
+        $twig = new \Twig\Environment($loader);
+
+        $access = AccessService::levelAccess($user->{"acesso"});
+
+        $template = $twig->load('pages/adminImages.twig');
+        echo $template->render([
+            "user_acessos" => $access,
+            "data" => $result["images"]
+        ]);
+        return;
+    }    
 }

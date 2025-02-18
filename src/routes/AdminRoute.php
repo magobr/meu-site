@@ -16,11 +16,16 @@ class AdminRoute
     {
         SimpleRouter::group(["middleware" => Auth::class, "prefix" => "/admin"], function ()
         {
-            SimpleRouter::group(["middleware" => Access::class], function ()
+            SimpleRouter::group(["prefix" => "/posts", "middleware" => Access::class], function ()
             {
-                SimpleRouter::get('/posts/new', [AdminController::class, "renderNewPost"]);
-                SimpleRouter::get('/posts/edit/{id}', [AdminController::class, "renderEditPosts", $params='']);
-                SimpleRouter::get('/posts/delete/{id}', [AdminController::class, "renderDelPosts", $params='']);
+                SimpleRouter::get('/new', [AdminController::class, "renderNewPost"]);
+                SimpleRouter::get('/edit/{id}', [AdminController::class, "renderEditPosts", $params='']);
+                SimpleRouter::get('/delete/{id}', [AdminController::class, "renderDelPosts", $params='']);
+            });
+
+            SimpleRouter::group(["prefix" => "/image", "middleware" => Access::class], function()
+            {
+                SimpleRouter::get('/', [AdminController::class, "renderImage"]);
             });
 
             SimpleRouter::get('/posts', [AdminController::class, "renderUserPosts"]);
