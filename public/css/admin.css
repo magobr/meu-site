@@ -202,3 +202,10 @@ section .post__item .actions ul li{
 .input__form_btn.btn-red:focus{
     box-shadow: 0px 0px 20px 1px #c0392b;
 }
+
+/* Images */
+
+section .content__images{
+    display: flex;
+    flex-wrap: wrap;
+}

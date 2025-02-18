@@ -17,8 +17,8 @@
                             </div>
                         </a>
                     </li>
+                    {% if "usuarios" in user_acessos %}
                     <li>
-                        {% if "usuarios" in user_acessos %}
                         <a href="/admin/posts/new">
                             <div class="item-menu-block">
                                 <div class="icon__menu">
@@ -29,8 +29,8 @@
                                 </div>
                             </div>
                         </a>
-                        {% endif %}
                     </li>
+                    {% endif %}
                     {% if "usuarios" in user_acessos %}
                     <li>
                         <a href="#">
@@ -40,6 +40,20 @@
                                 </div>
                                 <div class="item_menu">
                                     Usuários
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    {% endif %}
+                    {% if "usuarios" in user_acessos %}
+                    <li>
+                        <a href="/admin/image">
+                            <div class="item-menu-block">
+                                <div class="icon__menu">
+                                    <span class="material-symbols-outlined">image</span>
+                                </div>
+                                <div class="item_menu">
+                                    Imagens
                                 </div>
                             </div>
                         </a>
