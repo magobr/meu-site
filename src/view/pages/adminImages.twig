@@ -17,6 +17,7 @@
                 {% for key, content in data %}
                     <div class="content__images-item">
                         <img src="{{content.image}}" id="{{content.id}}" alt="" srcset="" style="width: 300px;">
+                        <div class="btn" data-id-image="{{content.id}}">apagar</div>
                     </div>
                 {% endfor %}
             </div>
