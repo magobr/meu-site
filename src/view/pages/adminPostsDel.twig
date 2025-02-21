@@ -48,10 +48,14 @@
             var result = await consumeApi(`/posts/delete/${postId}`, null, "DELETE");
 
             if(!result.error){
-                window.location.href = '/admin/posts';
+                alertSuccessFunction();
+                setTimeout(() => {
+                    window.location.href = '/admin/posts';
+                }, 2000);
                 return
             }
 
+            alertErrorFunction();
             alert("Erro ao excluir Post");
 
             console.log(result);

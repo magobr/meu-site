@@ -97,7 +97,7 @@ section .post__item {
     display: flex;
     justify-content: space-between;
     font-size: 14px;
-    margin: 30px;
+    margin: 20px 10px;
 }
 
 section .post__item .post_info div{
@@ -205,6 +205,10 @@ section .post__item .actions ul li{
 
 /* Images */
 
+section .add_image {
+    margin: 5px;
+}
+
 section .content__images{
     display: flex;
     flex-wrap: wrap;
@@ -217,7 +221,7 @@ section .content__images .content__images-item {
 }
 
 section .btn {
-    background-color: #c0392b;
+    background-color: #2980b9;
     color: #ecf0f1;
     padding: 5px 10px;
     border: none;
@@ -226,5 +230,16 @@ section .btn {
     text-align: center;
     font-weight: 600;
     font-size: 13px;
-    text-transform: uppercase;
+    margin: 5px;
+}
+
+section .btn.btn-red {
+    background-color: #e74c3c;
+    color: #ecf0f1;
+}
+
+section .btn.btn-green{
+    background: #27ae60;
+    border: #27ae60;
+    color: #ecf0f1;
 }
