@@ -6,6 +6,7 @@
         {% include "utils/login.css.twig" %}
         <script src="/public/js/modal.js"></script>
         <script src="/public/js/alert.js"></script>
+        <script src="/public/js/admin.js"></script>
     </head>
 <body>
     <main>
@@ -13,17 +14,95 @@
 
         <section>
             <h1>Imagens</h1>
+            <div class="add_image">
+                <label for="new-image" class="btn">Adicionar Imagem</label>
+                <input class="input__form_field" type="file" name="image" id="new-image" placeholder="Selecione Uma imagem" style="display: none;">
+            </div>
             <div class="content__images">
                 {% for key, content in data %}
                     <div class="content__images-item">
-                        <img src="{{content.image}}" id="{{content.id}}" alt="" srcset="" style="width: 300px;">
-                        <div class="btn" data-id-image="{{content.id}}">apagar</div>
+                        <img src="{{content.image}}" alt="" srcset="" style="width: 300px;">
+                        <div class="btn btn-red" id="{{content.id}}" style="text-transform: uppercase;">apagar</div>
                     </div>
                 {% endfor %}
             </div>
         </section>
         
     </main>
+    
+    <script>
+        async function deleteImg(id) {
+            alertSuccessInit("A Imagem foi deletada com sucesso!");
+            alertErrorInit("A Imagem não foi deletada!");
+            var result = await consumeApi('/image/' + id, null, 'DELETE')
+
+            if (result.error) {
+                alertErrorFunction();
+            }
+
+            alertSuccessFunction();
+            setTimeout(() => {
+                location.reload();
+            }, 2000);
+        }
+
+        async function sendImage(image) {
+            if (typeof image == 'object') {
+                alertSuccessInit("A Imagem foi adicionada com sucesso!");
+                alertErrorInit("A Imagem não foi adicionada!");
+                modalInit("Deseja adicionar essa imagem?");
+                let responseModal = await modalFunction();
+                if (!responseModal) {
+                    return;
+                }
+
+                var data = new FormData()
+                data.append('image', image);
+
+                try {
+                    var resImage = await fetch('/image/new', {
+                        method: 'POST',
+                        body: data
+                    }); 
+
+                    alertSuccessFunction();
+                    setTimeout(() => {
+                        location.reload();
+                    }, 2000);
+
+                } catch (error) {
+                    alertErrorFunction();
+                }              
+            }
+        }
+
+        const btnsDel = document.querySelectorAll('.content__images-item .btn');
+        btnsDel.forEach(btn => {
+            btn.addEventListener('click', async () => {
+                let id = btn.id;
+                modalInit("Deseja deletar essa imagem?");
+                let responseModal = await modalFunction();
+                if (!responseModal) {
+                    return;
+                }
+                const delImage = await deleteImg(id);
+            });
+        });
+
+        const btnAdd = document.querySelector('.add_image .btn');
+        btnAdd.addEventListener('click', async () => {
+
+            var inputImage = document.getElementById("new-image");
+
+            inputImage.addEventListener('input', () => {
+                btnAdd.innerHTML = inputImage.files[0].name;
+                sendImage(inputImage.files[0]);
+            });
+
+            return null
+
+        });
+    </script>
+
     {% include "scripts/icons.twig" %}
-    <script src="/public/js/admin.js"></script>
 </body>
