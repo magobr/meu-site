@@ -5,6 +5,7 @@
         <link rel="stylesheet" href="/public/css/admin.css">
         {% include "utils/login.css.twig" %}
         {% include "components/headQuilljs.twig" %}
+        <script src="/public/js/admin.js"></script>
         <script src="/public/js/modal.js"></script>
         <script src="/public/js/alert.js"></script>
     </head>
@@ -17,12 +18,11 @@
             
             <form id="form__post">
                 <div class="input__form">
-                    <label for="titulo__form">Título</label>
-                    <input class="input__form_field" type="text" id="titulo__form" value="">
+                    <label class="input__form_btn btn-blue" for="image">Capa</label>
                 </div>
                 <div class="input__form">
-                    <label for="titulo__form">Capa</label>
-                    <input class="input__form_field" type="file" name="image" id="image" placeholder="Selecione Uma imagem" >
+                    <label for="titulo__form">Título</label>
+                    <input class="input__form_field" type="text" id="titulo__form" value="">
                 </div>
                 <div class="input__form input__form_editor">
                     <label for="editor">Conteúdo</label>
@@ -37,37 +37,21 @@
     <script>
 
         const form = document.getElementById("form__post")
-
+        alertSuccessInit("Publicação feita com sucesso!");
+        alertErrorInit("Publicação falhou!");
         modalInit("Deseja Publicar esse Post");
 
-        async function sendImage() {
-            alertErrorInit("Erro ao inserir imagem!");
-            var inputImage = document.getElementById("image");
-            if (inputImage.files[0]) {
-
-                var dataImage = new FormData()
-                dataImage.append('image', inputImage.files[0]);
-
-                try {
-                    var resImage = await fetch('/image/new', {
-                        method: 'POST',
-                        body: dataImage
-                    }); 
-
-                    return await resImage.json();
-
-                } catch (error) {
-                    return await error
-                }              
+        async function listImages() {
+            try {
+                const response = await fetch('/image');
+                return await response.json();
+            } catch (error) {
+                console.error('Error fetching images:', error);
+                return [];
             }
-
-            return null
         }
 
         async function sendForm(img) {
-            alertSuccessInit("Publicação feita com sucesso!");
-            alertErrorInit("Publicação falhou!");
-
             var conteudo__from = editor.root.innerHTML;
             const userId = "{{id}}";
             var titulo__form = document.getElementById("titulo__form");
@@ -92,19 +76,17 @@
         form.addEventListener('submit', async (e)=>{
             e.preventDefault();
             const responseModal = await modalFunction();
-
+            var imagesData = getElementSelected()
             if (!responseModal) {
                 return
             }
 
-            var resImage = await sendImage();
-
-            if (resImage.error) {
+            if (imagesData == null) {
                 alertErrorFunction();
                 return
             }
             
-            var formData = await sendForm(resImage.id)
+            var formData = await sendForm(imagesData.id)
             
             if(formData.error){
                 alertErrorFunction();
@@ -114,9 +96,27 @@
             alertSuccessFunction();
             return
         });
+
+        const btnAddImage = document.querySelector('.input__form_btn.btn-blue');
+        btnAddImage.addEventListener('click', async () => {
+            let responseImages = await listImages();
+            modalElementInit(responseImages.images);
+
+            const responseModal = await modalElementsFunction();
+            if (!responseModal) {
+                return;
+            }
+
+            var imagesData = getElementSelected()
+            btnAddImage.innerHTML = `<img class="element-modal" id="${imagesData.id}" src="${imagesData.image}" alt="image" width="300">`;
+            btnAddImage.style.background = "none";
+            btnAddImage.style.border = "none";
+
+            return null
+        });
     </script>
 
     {% include "scripts/icons.twig" %}
-    <script src="/public/js/admin.js"></script>
+    
     
 </body>
