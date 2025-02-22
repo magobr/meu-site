@@ -33,3 +33,15 @@
 .modal_content-buttons{
     margin: 5px 0;
 }
+
+.element-selected{
+    opacity: 1;
+}
+
+.element{
+    opacity: 0.5;
+}
+
+.element:hover{
+    opacity: 1;
+}

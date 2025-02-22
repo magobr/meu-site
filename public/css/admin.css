@@ -163,6 +163,20 @@ section .post__item .actions ul li{
     box-shadow: 0px 0px 20px 1px #2980b9;
 }
 
+.input__form_btn.btn-blue{
+    background-color: #2980b9;
+    color: #ecf0f1;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+    font-weight: 600;
+    font-size: 13px;
+    margin: 10px 0;
+    width: 100px;
+}
+
 .input__form_btn.btn-green{
     background: #27ae60;
     border: #27ae60;
