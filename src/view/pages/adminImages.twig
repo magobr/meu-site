@@ -34,7 +34,7 @@
         async function deleteImg(id) {
             alertSuccessInit("A Imagem foi deletada com sucesso!");
             alertErrorInit("A Imagem não foi deletada!");
-            var result = await consumeApi('/image/' + id, null, 'DELETE')
+            var result = await consumeApi('/image/' + id, null, 'DELETE');
 
             if (result.error) {
                 alertErrorFunction();
@@ -47,7 +47,7 @@
         }
 
         async function sendImage(image) {
-            if (typeof image == 'object') {
+            if (typeof image === 'object') {
                 alertSuccessInit("A Imagem foi adicionada com sucesso!");
                 alertErrorInit("A Imagem não foi adicionada!");
                 modalInit("Deseja adicionar essa imagem?");
@@ -56,7 +56,7 @@
                     return;
                 }
 
-                var data = new FormData()
+                var data = new FormData();
                 data.append('image', image);
 
                 try {
@@ -99,7 +99,7 @@
                 sendImage(inputImage.files[0]);
             });
 
-            return null
+            return null;
 
         });
     </script>
