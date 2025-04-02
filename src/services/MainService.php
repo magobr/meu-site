@@ -16,6 +16,10 @@ class MainService
 
     static function getUser()
     {
+        if (!isset($_COOKIE["USER_TOKEN"])){
+            MainService::Redirect("/admin");
+        }
+        
         $user = UserController::getUserCookie($_COOKIE["USER_TOKEN"]);
         $user = get_object_vars($user);
         return $user[0];

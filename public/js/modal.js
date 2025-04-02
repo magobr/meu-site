@@ -19,7 +19,6 @@ const modalInit = (text) => {
 
 const modalElementInit = (elements) => {
     let images = [];
-    console.log(elements);
     elements.forEach(element => {
         images.push(`<img class="element-modal element" id="${element.id}" src="${element.image}" alt="image" width="300">`);
     });

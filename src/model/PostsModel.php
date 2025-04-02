@@ -21,17 +21,32 @@ class PostsModel extends Sql
 
     static public function findPostsById($id)
     {
-        $data =[
+        $data = [
             "table" => "POSTS",
-            "campos" => "POSTS.id, DATE_FORMAT(POSTS.created_at, '%d/%m/%Y') AS created_at, POSTS.titulo, POSTS.conteudo, USER_POSTER.nome AS user_post",
-            "params"=> "INNER JOIN USER_POSTER ON POSTS.user_post = USER_POSTER.id WHERE POSTS.id = :id",
+            "campos" => "POSTS.id, DATE_FORMAT(POSTS.created_at, '%d/%m/%Y') AS created_at, POSTS.titulo, POSTS.conteudo, USER_POSTER.nome AS user_post, POSTS_COVER.image, POSTS_COVER.id AS image_id",
+            "params"=> "WHERE POSTS.id = :id",
             "values" => [
                 "id" => $id
             ]
         ];
+        
+        $joinImage = [
+            [
+                "table" => "POSTS_COVER",
+                "joinTable" => "POSTS",
+                "key" => "id",
+                "keyJoin" => "image",
+            ],
+            [
+                "table" => "USER_POSTER",
+                "joinTable" => "POSTS",
+                "key" => "id",
+                "keyJoin" => "user_post",
+            ],
+        ];
 
         $sql = new Sql();
-        return $sql->find($data['table'], $data["values"], $data['params'], $data['campos']);
+        return $sql->find($data['table'], $data["values"], $data['params'], $data['campos'], $joinImage);
     }
 
     static public function findPostsByUser($id)
@@ -66,9 +81,9 @@ class PostsModel extends Sql
     {
         $data = [
             "table" => "POSTS",
-            "campos" => ["titulo", "conteudo"],
+            "campos" => ["titulo", "conteudo", "image"],
             "valores" => $valores,
-            "indexCampos" => [":titulo", ":conteudo"],
+            "indexCampos" => [":titulo", ":conteudo", ":image"],
             "params"=>"WHERE id = '$user_id';"
         ];
 
