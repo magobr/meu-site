@@ -4,12 +4,11 @@ namespace Config;
 
 use \PDO;
 
-class Sql extends PDO
-{
+class Sql extends PDO {
+
     private $conn;
 
-    public function __construct()
-    {
+    public function __construct() {
         $servername = $_ENV['SERVERNAME'];
         $username = $_ENV['USERNAME'];
         $password = $_ENV['PASSWORD'];
@@ -19,20 +18,35 @@ class Sql extends PDO
         $options = array(
             PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8',
         );
-        
-        try{
-            $this->conn = new PDO("mysql:host=$servername;port=$port;dbname=$dbname",$username,$password, $options);
-            $this->conn -> setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-        } catch(\PDOException $e){
-            echo "Connection failed: " . $e -> getMessage();
-        }
 
+        try {
+            $this->conn = new PDO("mysql:host=$servername;port=$port;dbname=$dbname", $username, $password, $options);
+            $this->conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+        } catch (\PDOException $e) {
+            echo "Connection failed: " . $e->getMessage();
+        }
     }
 
-    public function find(string $tabela, array $values = [], string $params = "", string $campos = " * ")
-    {
+    private function generateJoin(array $param) {
+        if (empty($param)) {
+            return "";
+        }
+
+        $stringReturn = '';
+        foreach ($param as $item) {
+            $join = "INNER JOIN " . $item['table'] . " ON " . $item['table'] . "." . $item['key'] . " = " . $item['joinTable'] . "." . $item['keyJoin'];
+
+            $stringReturn .= $join . ' ';
+        }
+        return $stringReturn;
+    }
+
+    public function find(string $tabela, array $values = [], string $params = "", string $campos = " * ", array $joinTable = []) {
         try {
-            $query = "SELECT $campos FROM $tabela $params";
+            $itensJoin = $this->generateJoin($joinTable);
+            $query = "SELECT $campos FROM $tabela $itensJoin $params";
+            
+//            die(var_dump($query));
             $stmt = $this->conn->prepare($query);
             $stmt->execute($values);
             return $stmt->fetchAll();
@@ -45,8 +59,7 @@ class Sql extends PDO
         }
     }
 
-    public function store(string $tabela, array $valores, string $campos, string $indexCampos)
-    {
+    public function store(string $tabela, array $valores, string $campos, string $indexCampos) {
         try {
             $query = "INSERT INTO $tabela ($campos) VALUES ($indexCampos)";
             $stmt = $this->conn->prepare($query);
@@ -64,11 +77,10 @@ class Sql extends PDO
         }
     }
 
-    public function updateItem(string $tabela, array $valores, array $campos, string $params = "", array $indexCampos)
-    {
+    public function updateItem(string $tabela, array $valores, array $campos, string $params = "", array $indexCampos) {
         $strCampos = '';
-        foreach($campos as $key => $campo){
-            $strCampos .= $campo."=$indexCampos[$key], ";
+        foreach ($campos as $key => $campo) {
+            $strCampos .= $campo . "=$indexCampos[$key], ";
         }
 
         $strCampos = rtrim($strCampos, ", ");
@@ -86,14 +98,12 @@ class Sql extends PDO
         }
     }
 
-    public function delItem(string $tabela, array $data, string $params)
-    {
+    public function delItem(string $tabela, array $data, string $params) {
         try {
             $query = "DELETE FROM $tabela WHERE $params";
             $stmt = $this->conn->prepare($query);
             $stmt->execute($data);
             return $stmt->rowCount();
-            
         } catch (\Throwable $th) {
             return [
                 "error" => true,
