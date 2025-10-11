@@ -44,7 +44,19 @@ const modalElementInit = (elements) => {
 var elementSelected = null;
 
 function getElementSelected(){
-    return elementSelected;
+
+    if (elementSelected != null){
+        return elementSelected;
+    }
+
+    if(typeof document.querySelector('.element-modal').id != 'undefined'){
+        elementSelected = {
+            id: document.querySelector('.element-modal').id,
+            image: document.querySelector('.element-modal').src
+        };
+    };
+
+    return elementSelected;    
 }
 
 const setSelectElement = () => {
