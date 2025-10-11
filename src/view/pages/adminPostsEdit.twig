@@ -18,7 +18,7 @@
             <form id="form__post">
                 <div class="input__form">
                     <label class="image__select" for="image" style="cursor: pointer;">
-                        <img class="element-modal" src="{{data.image}}" alt="image" width="300">
+                        <img class="element-modal" src="{{data.image}}" alt="image" width="300" id="{{data.image_id}}">
                     </label>
                 </div>
                 <div class="input__form">
@@ -42,9 +42,7 @@
         var titulo__form = document.getElementById("titulo__form");
 
         modalInit("Deseja Publicar esse Post");
-        alertSuccessInit("Publicação foi editada com sucesso!");
-        alertErrorInit("Publicação não foi editada!");
-        
+        alertSuccessInit("Publicação foi editada com sucesso!");        
         
         async function listImages() {
             try {
@@ -62,11 +60,6 @@
             let responseModal = await modalFunction();
             var imagesData = getElementSelected()
             if (!responseModal) {
-                return
-            }
-
-            if (imagesData == null) {
-                alertErrorFunction();
                 return
             }
 
