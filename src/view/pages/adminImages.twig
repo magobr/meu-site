@@ -34,7 +34,7 @@
         async function deleteImg(id) {
             alertSuccessInit("A Imagem foi deletada com sucesso!");
             alertErrorInit("A Imagem não foi deletada!");
-            var result = await consumeApi('/admin/image/' + id, null, 'DELETE');
+            var result = await consumeApi('/api/image/' + id, null, 'DELETE');
 
             if (result.error) {
                 alertErrorFunction();
@@ -60,7 +60,7 @@
                 data.append('image', image);
 
                 try {
-                    var resImage = await fetch('/image/new', {
+                    var resImage = await fetch('/api/image/new', {
                         method: 'POST',
                         body: data
                     }); 
